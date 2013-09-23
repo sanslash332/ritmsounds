@@ -1,0 +1,6 @@
+#archivos de configuracion de visual studio
+*.suo
+#archivos python compilados
+*.pyc
+#ejecutables de windows
+*.exe
