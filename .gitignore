@@ -4,3 +4,5 @@
 *.pyc
 #ejecutables de windows
 *.exe
+#canciones utilizadas en el juego
+*.mp3
