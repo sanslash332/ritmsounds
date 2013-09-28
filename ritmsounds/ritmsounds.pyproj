@@ -24,8 +24,13 @@
   <ItemGroup>
     <Compile Include="escritor.py" />
     <Compile Include="eventos.py" />
+    <Compile Include="juego.py" />
+    <Compile Include="playWindow.py" />
+    <Compile Include="recordWindow.py" />
     <Compile Include="ritmsounds.py" />
     <Compile Include="song.py" />
+    <Compile Include="soundevents.py" />
+    <Compile Include="testkeysWindow.py" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>

@@ -4,9 +4,9 @@ import os.path
 import datetime
 import eventos
 
-archlog = open("log.log", 'a')
+
 flog = eventos.Event()
-flog+=escribirLog
+
 def escribirSteps(nombre, steps):
     """Método para escribir en un archivo rtms los pasos y ticks correspondientes de una cancion"""
     if (os.path.isfile(nombre+".rtms") == true):
@@ -22,5 +22,9 @@ def escribirSteps(nombre, steps):
     archivo.close()
 
 def escribirLog(datos):
-    archlog.write(datetime.date.today() + ":" + datos)
+    archlog = open("log.log", 'a')
+    archlog.write(str(datetime.datetime.now()) +  ":" + datos + "\n")
     archlog.flush()
+    archlog.close()
+
+flog+=escribirLog

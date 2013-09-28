@@ -15,6 +15,7 @@ class Song(object):
         self.pause = music.pause()
         self.unpause = music.unpause
         self.stop = music.stop
+        self.isPlay= music.get_busy
 
 
         if (steps is None == False):
@@ -45,3 +46,6 @@ class Song(object):
 
     def str(self):
         return self.__name
+
+    def getAllSteps(self):
+        return self.__steps
