@@ -9,7 +9,7 @@ flog = eventos.Event()
 
 def escribirSteps(nombre, steps):
     """Método para escribir en un archivo rtms los pasos y ticks correspondientes de una cancion"""
-    if (os.path.isfile(nombre+".rtms") == true):
+    if (os.path.isfile(nombre+".rtms") == True):
         nombre += "new"
         escribirSteps(nombre,steps)
         return
@@ -17,7 +17,7 @@ def escribirSteps(nombre, steps):
 
     archivo = open(nombre + ".rtms", 'w')
     for s in steps:
-        archivo.write(s[0] + "|" + s[1] + "\n")
+        archivo.write(str(s[0]) + "|" + str(s[1]) + "\n")
     archivo.flush()
     archivo.close()
 
@@ -28,3 +28,15 @@ def escribirLog(datos):
     archlog.close()
 
 flog+=escribirLog
+
+def cargarSteps(cancion):
+    arch = open(cancion + ".rtms")
+    steps = []
+    for line in arch:
+        partidos = line.split('|')
+        if len(partidos) == 2:
+            steps.append((int(partidos[0]),int(partidos[1])))
+
+    escribirLog("cargada canción con " + str(len(steps)) + " pasos")
+    return steps
+

@@ -25,6 +25,7 @@
     <Compile Include="escritor.py" />
     <Compile Include="eventos.py" />
     <Compile Include="juego.py" />
+    <Compile Include="jugador.Py" />
     <Compile Include="playWindow.py" />
     <Compile Include="recordWindow.py" />
     <Compile Include="ritmsounds.py" />

@@ -2,15 +2,17 @@
 # -*- coding: latin-1 -*-
 import pygame as pg
 from pygame.mixer import music
+import escritor
 class Song(object):
     """Clase que representa a una canción del juego, tanto para reproducirla, como para interpretar / manejar sus pasos."""
 
     def __init__(self, name, steps = None):
+
         music.load(name)
         self.__name = name
 
         self.__steps = list()
-        self.__currentStep = None
+        self.__currentStep = 0
         self.play = music.play
         self.pause = music.pause()
         self.unpause = music.unpause
@@ -27,16 +29,20 @@ class Song(object):
     def addStep(self, step):
         self.__steps.append(step)
 
-    def getStep(self):
-        if (self.__currentStep is None):
-            return -1
+    def getStep(self,tick):
+        retorner = None 
+        #escritor.escribirLog("buscando step en tick " + str(tick))
 
-        auxiliar = self.__currentStep
-        self.__currentStep += 1
-        if (self.__currentStep >= len(self.__steps)):
-            self.__currentStep = auxiliar
+        for x in range(self.__currentStep,len(self.__steps)):
+            if self.__steps[x][0] == tick:
+                #escritor.escribirLog("tick encontrado")
 
-        return self.__steps[auxiliar]
+                retorner = self.__steps[x]
+                self.__currentStep=x
+
+        #escritor.escribirLog("se retornará " + str(retorner))
+        return retorner
+
 
 
     def loadSteps(self, steps):
@@ -49,3 +55,5 @@ class Song(object):
 
     def getAllSteps(self):
         return self.__steps
+    def clearSteps(self):
+        del self.__steps
