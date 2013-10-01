@@ -18,3 +18,9 @@ El juego se basa en 4 tipo de pasos diferentes, los cuales se ejecutan con:
 z, x, a y s.
 
 
+
+==== Canciones ====
+
+El juego sólo incluye una canción, menu.ogg con su secuencia de pasos ya creada. Si se quieren jugar más canciones, estas tienen que ser creadas por el usuario.
+Si se le intenta crear una nueva secuencia de pasos a una canción que ya posea, el juego la guardará, pero con un nombre nuevo, que para poder ser usada, tendrá que repararse manualmente.
+
