@@ -61,12 +61,13 @@ class Juego(object):
             elif self.__playMode==1:
                 self.player.sumarMiss(len(self.__stepStack))
             endSongEvent()
+            
 
     def __checkStepTime(self):
         """se remueven los steps que hayan estado por más de 30 ticks en el stack"""
         
         for x in range(0,len(self.__stepStack)):
-            if self.__ticks - self.__stepStack[x][0] >= 15:
+            if self.__ticks - self.__stepStack[x][0] >= 30:
                 self.__stepStack.pop(x)
                 #hitEvent(3)
                 self.player.sumarMiss(1)

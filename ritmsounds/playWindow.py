@@ -14,6 +14,7 @@ def startWindow( width, height,cancion):
     res = (width,height)
     pygame.init()
     pygame.display.set_caption("Modo juego!")
+    escape = False
     pantalla = pygame.display.set_mode(res)
     escritor.flog("iniciado modo de juego de la canción: " + cancion)
     
@@ -50,8 +51,9 @@ def startWindow( width, height,cancion):
                 pygame.display.quit()
                 end=True
                 jugo.stop()
-                del jugo
+                #del jugo
                 escritor.flog("cierre modo juego por evento de salida")
+                escape=True
             elif (event.type == pygame.KEYDOWN):
                 if event.key == K_s or event.key == K_a or event.key == K_x or event.key == K_z:
                     juego.stepEvent(teclas[event.key])
@@ -60,13 +62,19 @@ def startWindow( width, height,cancion):
                 elif(event.key == K_ESCAPE):
                     pygame.display.quit()
                     jugo.stop()
-                    del jugo
+                    #del jugo
+                    escape=True
 
                     escritor.flog("cierre por escape")
                     end=True
 
     pygame.display.quit()
-    print ("los resultados fueron " + str(jugo.player))
+    if escape==False:
+
+        jugo.stop()
+    if (jugo is None) == False:
+
+        print ("los resultados fueron " + str(jugo.player))
 
 
 
