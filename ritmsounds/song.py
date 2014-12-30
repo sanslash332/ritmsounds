@@ -18,6 +18,7 @@ class Song(object):
         self.unpause = music.unpause
         self.stop = music.stop
         self.isPlay= music.get_busy
+        self.setVolume = music.set_volume
 
 
         if (steps is None == False):

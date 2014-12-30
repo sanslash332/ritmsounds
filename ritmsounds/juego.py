@@ -27,13 +27,16 @@ class Juego(object):
             if len(self.__stepStack) > 0:
                 if self.__stepStack[0][1] == hit:
                     self.player.sumarPuntos(1)
+                    self.__song.setVolume(1)
                     self.__stepStack.pop(0)
 
                 else:
                     self.player.sumarMiss(1)
-                    self.__stepStack.pop(0)
+                    
+                    self.__song.setVolume(0.3)
             else:
-                self.player.sumarMiss(0)
+                self.player.sumarMiss(1)
+                self.__song.setVolume(0.3)
 
 
 
@@ -72,6 +75,7 @@ class Juego(object):
                 #hitEvent(3)
                 self.player.sumarMiss(1)
                 self.__checkStepTime()
+                self.__song.setVolume(0.3)
                 break
         
 
@@ -108,12 +112,14 @@ class Juego(object):
             self.__song = song.Song(cancion)
             self.__playMode = 0
             hitEvent+=self.hitStep
+            self.__song.setVolume(1)
         elif modo == 1:
             self.__playMode=1
             stepEvent+=self.hitStep
             self.__stepStack=list()
             self.__song=song.Song(cancion)
             self.__song.loadSteps(escritor.cargarSteps(cancion))
+            self.__song.setVolume(1)
 
 
 
