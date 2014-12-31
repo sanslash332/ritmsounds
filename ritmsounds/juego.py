@@ -42,13 +42,14 @@ class Juego(object):
             else:
                 point = False
                 for x in range(0,len(self.__stepPoints)):
-                    if self.__stepPoints[x][0]-10 <= self.__ticks and self.__stepPoints[x][0]+30 > self.__ticks and self.__stepPoints[x][1] == hit and self.__stepPoints[x][2] == False:
+                    if self.__stepPoints[x][0]-20 <= self.__ticks and self.__stepPoints[x][0]+30 > self.__ticks and self.__stepPoints[x][1] == hit and self.__stepPoints[x][2] == False:
                         self.__stepPoints[x] = (self.__stepPoints[x][0], self.__stepPoints[x][1], True)
                         self.player.sumarPuntos(1)
                         point=True
                         self.__song.setVolume(1)
                         if len(self.__stepStack) > 0  and self.__stepStack[0][0] == self.__stepPoints[x][0] and self.__stepStack[0][1] == self.__stepPoints[x][1]:
                             self.__stepStack.pop(0)
+                        break
 
                 if point == False:
                     self.__song.setVolume(0.3)
