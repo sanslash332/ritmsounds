@@ -24,19 +24,44 @@ class Juego(object):
         if (self.__playMode==0):
             self.__song.addStep((self.__ticks,hit))
         elif self.__playMode==1:
-            if len(self.__stepStack) > 0:
-                if self.__stepStack[0][1] == hit:
-                    self.player.sumarPuntos(1)
-                    self.__song.setVolume(1)
-                    self.__stepStack.pop(0)
+            if self.__pointMode== 0:
 
+                if len(self.__stepStack) > 0:
+                    if self.__stepStack[0][1] == hit:
+                        self.player.sumarPuntos(1)
+                        self.__song.setVolume(1)
+                        self.__stepStack.pop(0)
+
+                    else:
+                        self.player.sumarMiss(1)
+                    
+                        self.__song.setVolume(0.3)
                 else:
                     self.player.sumarMiss(1)
-                    
                     self.__song.setVolume(0.3)
             else:
-                self.player.sumarMiss(1)
-                self.__song.setVolume(0.3)
+                point = False
+                for x in range(0,len(self.__stepPoints)):
+                    if self.__stepPoints[x][0]-10 <= self.__ticks and self.__stepPoints[x][0]+30 > self.__ticks and self.__stepPoints[x][1] == hit and self.__stepPoints[x][2] == False:
+                        self.__stepPoints[x] = (self.__stepPoints[x][0], self.__stepPoints[x][1], True)
+                        self.player.sumarPuntos(1)
+                        point=True
+                        self.__song.setVolume(1)
+                        if len(self.__stepStack) > 0  and self.__stepStack[0][0] == self.__stepPoints[x][0] and self.__stepStack[0][1] == self.__stepPoints[x][1]:
+                            self.__stepStack.pop(0)
+
+                if point == False:
+                    self.__song.setVolume(0.3)
+                    self.player.sumarMiss(1)
+
+
+                        
+
+
+
+
+
+
 
 
 
@@ -52,7 +77,18 @@ class Juego(object):
             #escritor.escribirLog("lo encontrado es " + str(step))
             self.__checkStepTime()
             if (step is None) == False:
-                self.__stepStack.append(step)
+                enter = True
+                if self.__playMode == 1:
+                    for x in self.__stepPoints:
+                        if x[0] == step[0] and x[1] == step[1] and x[2] == True:
+                            enter = False
+
+
+
+
+                if enter:
+
+                    self.__stepStack.append(step)
                 #escritor.flog("añadido paso al stack" + str(step[1]) + " en el tiempo " + str(self.__ticks))
                 hitEvent(step[1])
             
@@ -98,7 +134,7 @@ class Juego(object):
 
         
 
-    def __init__(self, cancion, modo):
+    def __init__(self, cancion, modo, tipo= 0 ):
         object.__init__(self)
         self.__ticks=0
         global hitEvent
@@ -120,6 +156,18 @@ class Juego(object):
             self.__song=song.Song(cancion)
             self.__song.loadSteps(escritor.cargarSteps(cancion))
             self.__song.setVolume(1)
+            self.__pointMode=0
+            if tipo == 1:
+                self.__pointMode=1
+
+                self.__stepPoints = list()
+                for step in self.__song.getAllSteps():
+                    self.__stepPoints.append((step[0], step[1],False))
+
+
+
+
+
 
 
 

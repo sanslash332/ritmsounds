@@ -18,7 +18,7 @@ def startWindow( width, height,cancion):
     pantalla = pygame.display.set_mode(res)
     escritor.flog("iniciado modo de juego de la canción: " + cancion)
     
-    jugo = juego.Juego(cancion,1)
+    jugo = juego.Juego(cancion,1,1)
     teclas = {}
     teclas[K_a] = 0
     teclas[K_s] = 1
