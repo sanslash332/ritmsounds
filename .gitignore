@@ -8,3 +8,5 @@
 *.mp3
 #archivos de log
 *.log
+*.ogg
+*.rtms
