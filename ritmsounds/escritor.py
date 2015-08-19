@@ -3,23 +3,32 @@
 import os.path
 import datetime
 import eventos
-
+import jsonpickle
 
 flog = eventos.Event()
 
-def escribirSteps(nombre, steps):
+def saveSong(song):
     """Método para escribir en un archivo rtms los pasos y ticks correspondientes de una cancion"""
-    if (os.path.isfile(nombre+".rtms") == True):
-        nombre += "new"
-        escribirSteps(nombre,steps)
-        return
+    nombre = song.songpath
+
+    if (os.path.isfile(song.songpath+".rtms") == True):
+        try:
+            os.remove(song.songpath+".rtms")
+        except Exception:
+            nombre = nombre+"new"
+
+
+
+        
 
 
     archivo = open(nombre + ".rtms", 'w')
-    for s in steps:
-        archivo.write(str(s[0]) + "|" + str(s[1]) + "\n")
+    archivo.write(song.genJson())
+
+    
     archivo.flush()
     archivo.close()
+
 
 def escribirLog(datos):
     archlog = open("log.log", 'a')
@@ -29,14 +38,14 @@ def escribirLog(datos):
 
 flog+=escribirLog
 
-def cargarSteps(cancion):
+def loadSong(cancion):
     arch = open(cancion + ".rtms")
-    steps = []
-    for line in arch:
-        partidos = line.split('|')
-        if len(partidos) == 2:
-            steps.append((int(partidos[0]),int(partidos[1])))
+    data = ""
+    while(arch):
+        data = data+arch.readline()
+    song = jsonpickle.decode(data)
+
 
     escribirLog("cargada canción con " + str(len(steps)) + " pasos")
-    return steps
+    return song
 

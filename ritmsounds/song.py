@@ -3,42 +3,52 @@
 import pygame as pg
 from pygame.mixer import music
 import escritor
+import steplist
+import jsonpickle
+
 class Song(object):
     """Clase que representa a una canción del juego, tanto para reproducirla, como para interpretar / manejar sus pasos."""
 
-    def __init__(self, name, steps = None):
+    def __init__(self, name, songpath, steps = None):
 
-        music.load(name)
-        self.__name = name
+
+        self.name = name
+        self.songpath = songpath
 
         self.__steps = list()
-        self.__currentStep = 0
-        self.play = music.play
-        self.pause = music.pause()
-        self.unpause = music.unpause
-        self.stop = music.stop
-        self.isPlay= music.get_busy
-        self.setVolume = music.set_volume
+        self.__currentSteplist = steplist.steplist()
+        self.__currentStep=0
 
-
-        if (steps is None == False):
+        if (steps is None == 	False):
             self.__steps = steps
-            self.__currentStep=0
+
+    def selectSteplist(self, index):
+        self.__currentSteplist = __steps[index]
+
 
 
 
     def addStep(self, step):
-        self.__steps.append(step)
+        self.__currentSteplist.steps.append(step)
+
+    def setHands(self, hands):
+        self.__currentSteplist.hands = hands
+
+    def setPressSpeed(self, speed):
+            self.__currentSteplist.pressSpeed = speed
+
+    def setSteplistname(self, name):
+        self.__currentSteplist.name=name
 
     def getStep(self,tick):
         retorner = None 
         #escritor.escribirLog("buscando step en tick " + str(tick))
 
-        for x in range(self.__currentStep,len(self.__steps)):
-            if self.__steps[x][0] == tick:
+        for x in range(self.__currentStep,len(self.__currentSteplist.steps)):
+            if self.__currentSteplist.steps[x][0] == tick:
                 #escritor.escribirLog("tick encontrado")
 
-                retorner = self.__steps[x]
+                retorner = self.__currentSteplist.steps[x]
                 self.__currentStep=x
 
         #escritor.escribirLog("se retornará " + str(retorner))
@@ -47,14 +57,27 @@ class Song(object):
 
 
     def loadSteps(self, steps):
-        """método que sirve para cargar unos pasos a la canción actual"""
-        self.__steps = steps
+        """método que sirve para cargar unos pasos a la dificultad actual de la canción actual"""
+        self.__currentSteplist.steps= steps
 
+
+    def saveSteplist(self):
+        self.__steps.append(self.__currentSteplist)
 
     def str(self):
         return self.__name
 
-    def getAllSteps(self):
+    def getAllStepslist(self):
         return self.__steps
+
     def clearSteps(self):
         del self.__steps
+
+    def genJson(self):
+        del self.__currentStep
+        del self.__currentSteplist
+        r = jsonpickle.encode(self)
+        self.__currentStep=0
+        self.__currentSteplist=steplist.steplist()
+        return(r)
+

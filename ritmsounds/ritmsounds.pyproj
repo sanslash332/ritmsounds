@@ -35,6 +35,9 @@
     <Compile Include="ritmsounds.py" />
     <Compile Include="song.py" />
     <Compile Include="soundevents.py" />
+    <Compile Include="steplist.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="testkeysWindow.py" />
   </ItemGroup>
   <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
