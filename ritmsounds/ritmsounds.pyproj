@@ -30,6 +30,9 @@
     <Compile Include="eventos.py" />
     <Compile Include="juego.py" />
     <Compile Include="jugador.Py" />
+    <Compile Include="keyManager.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="playWindow.py" />
     <Compile Include="recordWindow.py" />
     <Compile Include="ritmsounds.py" />

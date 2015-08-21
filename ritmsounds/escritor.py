@@ -41,11 +41,10 @@ flog+=escribirLog
 def loadSong(cancion):
     arch = open(cancion + ".rtms")
     data = ""
-    while(arch):
-        data = data+arch.readline()
+    data = arch.read()
     song = jsonpickle.decode(data)
 
 
-    escribirLog("cargada canción con " + str(len(steps)) + " pasos")
+    escribirLog("cargada canción " + song.name )
     return song
 

@@ -4,6 +4,7 @@ import juego
 import pygame
 from pygame.locals import *
 import escritor
+import keyManager
 
 def endSong():
     global end
@@ -15,14 +16,9 @@ def startWindow( width, height,cancion):
     pygame.init()
     pygame.display.set_caption("Modo grabación!")
     pantalla = pygame.display.set_mode(res)
-    escritor.flog("iniciado modo de grabación de la canción: " + cancion)
+    escritor.flog("iniciado modo de grabación de la canción: " + cancion.name)
     escape=False
     jugo = juego.Juego(cancion,0)
-    teclas = {}
-    teclas[K_a] = 0
-    teclas[K_s] = 1
-    teclas[K_z] = 2
-    teclas[K_x] = 3
     reloj = pygame.time.Clock()
     global end
     end = False
@@ -54,11 +50,12 @@ def startWindow( width, height,cancion):
                 escritor.flog("cierre modo prueba por evento de salida")
                 escape=True
             elif (event.type == pygame.KEYDOWN):
-                if event.key == K_s or event.key == K_a or event.key == K_x or event.key == K_z:
-                    juego.hitEvent(teclas[event.key])
-                    escritor.flog("precionada la tecla número " + str(teclas[event.key]))
+                pressKey = keyManager.getKey(event.key)
+                if pressKey!='back' and pressKey!='null':
+                    juego.hitEvent(pressKey)
+                    escritor.flog("precionada la tecla " + pressKey)
 
-                elif(event.key == K_ESCAPE):
+                elif(pressKey== 'back' and pressKey!='null'):
                     pygame.display.quit()
                     escritor.flog("cierre por escape")
                     

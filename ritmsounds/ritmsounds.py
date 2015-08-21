@@ -39,7 +39,9 @@ def menu():
             else:
                 print("preciona enter para iniciar a jugar \n ¡danse danse!")
                 input()
-                playWindow.startWindow(screen_width,screen_height,songs_dir+cancion)
+                j = escritor.loadSong(songs_dir+cancion)
+                j.selectSteplist(0)
+                playWindow.startWindow(screen_width,screen_height,j)
 
 
         elif option == "3":
@@ -51,7 +53,8 @@ def menu():
                 print("preciona enter para iniciar la grabación")
                 input()
 
-                recordWindow.startWindow(screen_width,screen_height,songs_dir+cancion)
+                j = song.Song(cancion,songs_dir+cancion)
+                recordWindow.startWindow(screen_width,screen_height,j)
 
 
                 

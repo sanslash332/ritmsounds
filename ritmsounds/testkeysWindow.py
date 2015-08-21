@@ -4,6 +4,7 @@ import juego
 import pygame
 from pygame.locals import *
 import escritor
+import keyManager
 
 def startWindow( width, height):
     res = (width,height)
@@ -11,11 +12,6 @@ def startWindow( width, height):
     pygame.display.set_caption("modo prueba de teclas")
     pantalla = pygame.display.set_mode(res)
     escritor.flog("iniciado modo de prueba")
-    teclas = {}
-    teclas[K_a] = 0
-    teclas[K_s] = 1
-    teclas[K_z] = 2
-    teclas[K_x] = 3
     reloj = pygame.time.Clock()
     end = False
     pantalla.fill((134,230,120))
@@ -39,11 +35,13 @@ def startWindow( width, height):
                 end=True
                 escritor.flog("cierre modo prueba por evento de salida")
             elif (event.type == pygame.KEYDOWN):
-                if event.key == K_s or event.key == K_a or event.key == K_x or event.key == K_z:
-                    juego.hitEvent(teclas[event.key])
-                    escritor.flog("precionada la tecla número " + str(teclas[event.key]))
+                pressKey = keyManager.getKey(event.key)
 
-                elif(event.key == K_ESCAPE):
+                if pressKey!= 'back' and pressKey!='null':
+                    juego.hitEvent(pressKey)
+                    escritor.flog("precionada la tecla  " + pressKey)
+
+                elif(pressKey=='back'):
                     pygame.display.quit()
                     escritor.flog("cierre por escape")
                     end=True

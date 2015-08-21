@@ -23,7 +23,7 @@ class Song(object):
             self.__steps = steps
 
     def selectSteplist(self, index):
-        self.__currentSteplist = __steps[index]
+        self.__currentSteplist = self.__steps[index]
 
 
 
@@ -34,11 +34,25 @@ class Song(object):
     def setHands(self, hands):
         self.__currentSteplist.hands = hands
 
+    def getHands(self):
+        return(self.__currentSteplist.hands)
+
+
     def setPressSpeed(self, speed):
             self.__currentSteplist.pressSpeed = speed
 
+    def getPressSpeed(self):
+        return(self.__currentSteplist.pressSpeed)
+
+
     def setSteplistname(self, name):
         self.__currentSteplist.name=name
+
+    def getSteplistname(self):
+        return(self.__currentSteplist.name)
+
+    def getStartHp(self):
+        return(self.__currentSteplist.startHp)
 
     def getStep(self,tick):
         retorner = None 
@@ -69,13 +83,17 @@ class Song(object):
 
     def getAllStepslist(self):
         return self.__steps
+    def getAllSteps(self):
+        return(self.__currentSteplist.steps)
+
+
 
     def clearSteps(self):
         del self.__steps
 
     def genJson(self):
-        del self.__currentStep
-        del self.__currentSteplist
+        self.__currentStep=0
+        self.__currentSteplist= steplist.steplist()
         r = jsonpickle.encode(self)
         self.__currentStep=0
         self.__currentSteplist=steplist.steplist()
