@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: latin-1 -*-
 import os.path
+import os
 import datetime
 import eventos
 import jsonpickle
@@ -47,4 +48,18 @@ def loadSong(cancion):
 
     escribirLog("cargada canción " + song.name )
     return song
+
+
+def loadAllSongs():
+    
+    songs=[]
+    s=""
+    for s in os.listdir("songs/"):
+        if s.endswith(".rtms"):
+            sd = s[:s.index(".rtms")]
+            songs.append(loadSong("songs/"+sd))
+    return(songs)
+
+
+
 

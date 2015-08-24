@@ -60,8 +60,9 @@ def startWindow( width, height,cancion):
                 elif(pressKey=='back'):
                     pygame.display.quit()
                     jugo.stop()
-                    del jugo
+                    #del jugo
                     escape=True
+                    return(None)
 
                     escritor.flog("cierre por escape")
                     end=True
@@ -72,7 +73,7 @@ def startWindow( width, height,cancion):
         jugo.stop()
     if (jugo is None) == False:
 
-        print ("los resultados fueron " + str(jugo.player))
+        return(jugo)
 
 
 

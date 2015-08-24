@@ -17,10 +17,10 @@ keys = {
     'l2': K_s,
     'l3': K_z,
     'l4': K_x,
-    'r1': K_LEFT,
-    'r2': K_UP,
-    'r3': K_DOWN,
-    'r4': K_RIGHT
+    'r1': K_u,
+    'r2': K_i,
+    'r3': K_j,
+    'r4': K_k
     }
 
 
@@ -53,6 +53,7 @@ def loadKeys():
 def getKey(key):
     for k in keys.items():
         if k[1] == key:
+            escritor.flog("se detecto un:  "+k[0])
             return(k[0])
     return('null')
 

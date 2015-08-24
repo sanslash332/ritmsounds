@@ -33,11 +33,26 @@
     <Compile Include="keyManager.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="menuScreen.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="playWindow.py" />
     <Compile Include="recordWindow.py" />
+    <Compile Include="resultsWindow.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ritmsounds.py" />
+    <Compile Include="ritmsoundsW.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="selectSonScreen.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="song.py" />
     <Compile Include="soundevents.py" />
+    <Compile Include="speetchManager.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="steplist.py">
       <SubType>Code</SubType>
     </Compile>

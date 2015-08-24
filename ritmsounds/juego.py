@@ -35,7 +35,7 @@ class Juego(object):
             deatEvent()
             endSongEvent()
         elif self.player.getHP() >= self.__song.getStartHp():
-            self.player.setHP(getStartHp())
+            self.player.setHP(self.__song.getStartHp())
 
 
 
@@ -107,7 +107,7 @@ class Juego(object):
             if self.__ticks - self.__prestep[x][0] >= 20:
                 self.__prestep.pop(x)
                 self.player.sumarMiss(1)
-                soundevents.musicSetvolume(0.3)
+                soundevents.musicSetVolume(0.3)
                 self.consecutivePoints=0
                 self.player.setHP(self.player.getHP()-1)
                 self.checkLife()
