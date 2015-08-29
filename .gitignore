@@ -5,8 +5,7 @@
 #ejecutables de windows
 *.exe
 #canciones utilizadas en el juego
-*.mp3
+
 #archivos de log
 *.log
-*.ogg
 *.rtms
