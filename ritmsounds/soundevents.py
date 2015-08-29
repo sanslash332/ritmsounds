@@ -19,34 +19,67 @@ musicIsPlay = mixer.music.get_busy
 musicSetPos = mixer.music.set_pos
 musicPos = mixer.music.get_pos
 
-twoHands= False
+mixer.set_num_channels(16)
+twoHands = 1
 __hitsounds = {'l1': mixer.Sound("sfx/hit0.wav"), 'l2': mixer.Sound("sfx/hit1.wav"), 'l3': mixer.Sound("sfx/hit2.wav"), 'l4': mixer.Sound("sfx/hit3.wav"),'r1': mixer.Sound("sfx/hit0.wav"), 'r2': mixer.Sound("sfx/hit1.wav"), 'r3': mixer.Sound("sfx/hit2.wav"), 'r4': mixer.Sound("sfx/hit3.wav")}
 __startsound = mixer.Sound("sfx/start.wav")
 __beepSound = mixer.Sound("sfx/beep.wav")
 __errorSound = mixer.Sound("sfx/error.wav")
 
 __acceptsound = mixer.Sound("sfx/accept.wav")
-__moveSound = mixer.Sound("sfx/beep.wav")
+__moveSound = mixer.Sound("sfx/change.wav")
 __backSound = mixer.Sound("sfx/back.wav")
 __deathSound = mixer.Sound("sfx/death.wav")
+__lowHpSound = mixer.Sound("sfx/lowhp.wav")
+__damageSound = mixer.Sound("sfx/damage.wav")
+__restoreHP = mixer.Sound("sfx/restorehp.wav")
+
+def playDamage():
+    __damageSound.play()
+
+def playRestoreHP():
+    __restoreHP.play()
+
+def playLowHp():
+    __lowHpSound.play()
 
 def playError():
     __errorSound.play()
 
 def __playHit(hitNum):
     if hitNum in __hitsounds:
+        if twoHands==2:
 
-        __hitsounds[hitNum].play()
+            c=__hitsounds[hitNum].play()
+            
+            if hitNum.startswith("l"):
+                c.set_volume(1.0,0.1)
+            else:
+                c.set_volume(0.1,1.0)
+
+
+        else:
+            
+            __hitsounds[hitNum].play()
+
 
 
 def playMove():
+    __beepSound.play()
+
+def playChange():
     __moveSound.play()
+
 
 def playAccept():
     __acceptsound.play()
 
 def playback():
     __backSound.play()
+
+def playGoSound():
+    __startsound.play()
+
 
 def __playStartSound():
     __beepSound.play()

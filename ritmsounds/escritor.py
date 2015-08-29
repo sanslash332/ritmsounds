@@ -5,9 +5,11 @@ import os
 import datetime
 import eventos
 import jsonpickle
+import song
 
 flog = eventos.Event()
 
+logoff=True
 def saveSong(song):
     """Método para escribir en un archivo rtms los pasos y ticks correspondientes de una cancion"""
     nombre = song.songpath
@@ -18,11 +20,6 @@ def saveSong(song):
         except Exception:
             nombre = nombre+"new"
 
-
-
-        
-
-
     archivo = open(nombre + ".rtms", 'w')
     archivo.write(song.genJson())
 
@@ -32,10 +29,12 @@ def saveSong(song):
 
 
 def escribirLog(datos):
-    archlog = open("log.log", 'a')
-    archlog.write(str(datetime.datetime.now()) +  ":" + datos + "\n")
-    archlog.flush()
-    archlog.close()
+    if logoff==False:
+
+        archlog = open("log.log", 'a')
+        archlog.write(str(datetime.datetime.now()) +  ":" + datos + "\n")
+        archlog.flush()
+        archlog.close()
 
 flog+=escribirLog
 
@@ -63,3 +62,42 @@ def loadAllSongs():
 
 
 
+
+def loadAllTotalItems():
+    songs=[]
+    s=""
+    for s in os.listdir("songs/"):
+        if s.endswith(".rtms"):
+            sd = s[:s.index(".rtms")]
+            songs.append(loadSong("songs/"+sd))
+
+    for s in os.listdir("songs/"):
+        if s.endswith(".ogg"):
+            sd = s[:s.index(".ogg")]
+            js= song.Song(sd,"songs/"+s)
+            ent=True
+            for ss in songs:
+                flog("comparando " + js.name + " con " + ss.name)
+                if js.name==ss.name:
+                    ent=False
+
+            if ent:
+
+                songs.append(js)
+
+
+            
+        elif s.endswith(".mp3"):
+            sd = s[:s.index(".mp3")]
+            js=song.Song(sd,"songs/"+s)
+            ent=True
+            for ss in songs:
+                if js.name==ss.name:
+                    ent=False
+
+            if ent:
+
+                songs.append(js)
+
+
+    return(songs)

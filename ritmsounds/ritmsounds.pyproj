@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>e34832e6-7616-43cc-a1cb-67a51444dcc4</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>ritmsounds.py</StartupFile>
+    <StartupFile>ritmsoundsC.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -36,27 +36,39 @@
     <Compile Include="menuScreen.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="messagesManager.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="playWindow.py" />
+    <Compile Include="recordMenuScreen.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="recordWindow.py" />
     <Compile Include="resultsWindow.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ritmsounds.py" />
-    <Compile Include="ritmsoundsW.py">
+    <Compile Include="ritmsoundsC.py" />
+    <Compile Include="ritmsounds.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="selectSonScreen.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="setup.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="song.py" />
     <Compile Include="soundevents.py" />
-    <Compile Include="speetchManager.py">
+    <Compile Include="speechManager.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="steplist.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="testkeysWindow.py" />
+    <Compile Include="textInput.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />

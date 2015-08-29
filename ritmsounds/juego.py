@@ -25,18 +25,28 @@ class Juego(object):
         soundevents.musicPlay()
 
 
-    def checkLife(self):
-        if self.consecutivePoints==10:
-            self.player.setHP(self.player.getHP()+1)
+    def checkLife(self,hurt=False):
+        if hurt:
+            self.player.setHP(self.player.getHP()-1)
+            #soundevents.playDamage()
             self.consecutivePoints=0
+            HPpersent = int((self.player.getHP()*100)/self.__song.getStartHp())
+            if HPpersent==50:
+                soundevents.playLowHp()
 
 
-        if self.player.getHP() == 0:
+        if self.consecutivePoints==self.__song.getRestoreHp():
+            if self.player.getHP() < self.__song.getStartHp():
+                self.player.setHP(self.player.getHP()+1)
+                soundevents.playRestoreHP()
+            self.consecutivePoints=0
+            
+
+
+        if self.player.getHP() == 0 and self.__pointMode==0:
             deatEvent()
             endSongEvent()
-        elif self.player.getHP() >= self.__song.getStartHp():
-            self.player.setHP(self.__song.getStartHp())
-
+        
 
 
 
@@ -55,16 +65,10 @@ class Juego(object):
                     self.consecutivePoints+=1
                     self.checkLife()
 
-
-
-
-
                 else:
                     self.player.sumarMiss(1)
-                    self.player.setHP(self.player.getHP()-1)
-                    self.consecutivePoints=0
-                    self.checkLife()
-                    
+                    self.checkLife(True)
+                    self.__stepStack.pop(0)
                     soundevents.musicSetVolume(0.3)
 
             else:
@@ -82,19 +86,22 @@ class Juego(object):
             self.__checkStepTime()
             
 
-            if (step is None) == False:
+            if len(step) >0:
 
-                self.__stepStack.append(step)
+                self.__stepStack+=step
                 #escritor.flog("añadido paso al stack" + str(step[1]) + " en el tiempo " + str(self.__ticks))
-                hitEvent(step[1])
+                for st in step:
+                    hitEvent(st[1])
             
 
 
         if(soundevents.musicIsPlay() == False):
             if(self.__playMode == 0):
-                self.__song.saveSteplist()
+                #self.__song.saveSteplist()
 
-                escritor.saveSong(self.__song)
+                #escritor.saveSong(self.__song)
+                pass
+
             elif self.__playMode==1:
                 self.player.sumarMiss(len(self.__stepStack))
             endSongEvent()
@@ -104,13 +111,13 @@ class Juego(object):
         """se remueven los steps que hayan estado por más del pressspeed  ticks en el stack"""
         
         for x in range(0, len(self.__prestep)):
-            if self.__ticks - self.__prestep[x][0] >= 20:
+            if self.__ticks - self.__prestep[x][0] >= self.__antisipateTime:
                 self.__prestep.pop(x)
                 self.player.sumarMiss(1)
                 soundevents.musicSetVolume(0.3)
                 self.consecutivePoints=0
-                self.player.setHP(self.player.getHP()-1)
-                self.checkLife()
+                
+                self.checkLife(True)
                 self.__checkStepTime()
                 return()
             else:
@@ -124,13 +131,17 @@ class Juego(object):
                         self.player.sumarPuntos(1)
                         self.consecutivePoints+=1
                         self.checkLife()
+                        self.__checkStepTime()
+                        return()
+
 
                     else:
                         self.__prestep.pop(x)
-                        self.player.setHP(self.player.getHP() -1)
+                        self.__stepStack.pop(0)
+                        
                         soundevents.musicSetVolume(0.3)
                         self.consecutivePoints=0
-                        self.checkLife()
+                        self.checkLife(True)
 
                         self.__checkStepTime()
                         return()
@@ -145,11 +156,12 @@ class Juego(object):
                 #hitEvent(3)
                 self.player.sumarMiss(1)
                 self.consecutivePoints=0
-                self.player.setHP(self.player.getHP()-1)
-                self.checkLife()
+                
+                self.checkLife(True)
+                soundevents.musicSetVolume(0.3)
                 self.__checkStepTime()
                 
-                soundevents.musicSetVolume(0.3)
+                
                 break
         
 
@@ -195,8 +207,8 @@ class Juego(object):
         soundevents.musicLoad(self.__song.songpath)
         self.__pressSpeed = self.__song.getPressSpeed()
         #print(" este es el presspeed" + str(self.__pressSpeed))
-
-
+        soundevents.twoHands=self.__song.getHands()
+        self.__antisipateTime = self.__song.getAntisipateTime()
 
         if (modo == 0):
             
@@ -214,5 +226,30 @@ class Juego(object):
             self.__prestep = []
         
 
+    def calculatePunctuation(self):
+        points = self.player.getPuntos() - self.player.getMiss()
+        
+        totalpoints = len(self.__song.getAllSteps())
+        
+        escritor.flog("se consiguieron un total de: " + str(points) + " de un total de " + str(totalpoints) + " con : " + str(self.player.getMiss()) + " fallas ")
+        if points <= 0:
+            return("f")
+        else:
+            percent = (points*100)/totalpoints
+            if percent>=95:
+                return("s")
+            elif percent >= 80 :
+                return("a")
+            elif percent>= 60:
+                return("b")
+            elif percent>= 40:
+                return("c")
+            elif percent>=20:
+                return("d")
+            elif percent>= 10:
+                return("e")
+            else:
+                    return("f")
 
-
+    def getSong(self):
+        return(self.__song)

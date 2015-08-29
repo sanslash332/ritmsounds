@@ -6,6 +6,7 @@ import soundevents
 from pygame.locals import *
 import escritor
 import time
+import messagesManager as m
 
 def startWindow( width, height):
     res = (width,height)
@@ -16,21 +17,16 @@ def startWindow( width, height):
     reloj = pygame.time.Clock()
     end = False
     pantalla.fill((134,230,120))
-    letras = pygame.font.Font(None, 14)
-    letrasGrandes = pygame.font.Font(None, 20)
     menuitems=[]
-    mensaje = "Jugar una cancion"
-    mensaje2 = "Grabar una cancion"
-    mensaje3 = "Provar teclas"
-    mensaje4 = "Salir"
-    mensajeTitulo = "bienvenido a ritmsounds!"
+    menuitems.append("menuwindow:option0")
+    menuitems.append("menuwindow:option1")
+    menuitems.append("menuwindow:option2")
+    menuitems.append("menuwindow:option3")
+    menuitems.append("menuwindow:optionexit")
 
-    menuitems.append(letras.render(mensaje,1,(255,255,255), (100,100,100)))
-    menuitems.append(letras.render(mensaje2,1,(255,255,255), (100,100,100)))
-    menuitems.append(letras.render(mensaje3,1,(255,255,255), (100,100,100)))
-    menuitems.append(letras.render(mensaje4,1,(255,255,255), (100,100,100)))
-    titulo = letrasGrandes.render(mensajeTitulo,1,(255,255,255), (100,100,100))
-    pantalla.blit(titulo, (50,50))
+    titulo = "menuwindow:title"
+    last= titulo
+    menuhelp = "menuwindow:help"
     
     pygame.display.flip()
     estitulo =True
@@ -41,14 +37,12 @@ def startWindow( width, height):
 
     
     option=0
+    m.sayMessage(titulo)
+
     while (not end):
         reloj.tick(60)
         pantalla.fill((134,230,120))
-        if estitulo:
-            pantalla.blit(titulo, (400,250))
-        else:
-            pantalla.blit(menuitems[option], (400,300))
-    
+
         pygame.display.flip()
         
 
@@ -65,14 +59,16 @@ def startWindow( width, height):
                     soundevents.playAccept()
                     if estitulo==True:
                         estitulo=False
+                        m.sayMessage(menuhelp)
+                        last=menuhelp
                     else:
-                        if option==3:
+                        if option==4:
                             pygame.display.quit()
                             soundevents.musicFade(1500)
                             time.sleep(2)
                             
 
-                            exit()
+                            return(4)
                         else:
                             pygame.display.quit()
                             end=True
@@ -84,8 +80,10 @@ def startWindow( width, height):
 
                     soundevents.playMove()
                     option+=1
-                    if option>=4:
+                    if option>=5:
                         option=0
+                    m.sayMessage(menuitems[option])
+
 
 
                 elif pressKey == 'up':
@@ -95,26 +93,15 @@ def startWindow( width, height):
                     soundevents.playMove()
                     option -= 1 
                     if option<0:
-                        option=3
+                        option=4
+                    m.sayMessage(menuitems[option])
 
                 elif(pressKey=='back'):
                     pygame.display.quit()
                     escritor.flog("cierre por escape")
                     end=True
+                    return(4)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                else:
+                    if pressKey!= "stop":
+                        m.sayMessage(last)

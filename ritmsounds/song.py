@@ -22,11 +22,17 @@ class Song(object):
         if (steps is None == 	False):
             self.__steps = steps
 
+    def restartSong(self):
+        self.__currentStep=0
+
     def selectSteplist(self, index):
         self.__currentSteplist = self.__steps[index]
 
+    def resetSteplist(self):
+        self.__currentSteplist=steplist.steplist()
 
-
+    def resetSteps(self):
+        self.__currentSteplist.steps=[]
 
     def addStep(self, step):
         self.__currentSteplist.steps.append(step)
@@ -44,6 +50,17 @@ class Song(object):
     def getPressSpeed(self):
         return(self.__currentSteplist.pressSpeed)
 
+    def setAntisipateTime(self,anttime):
+        self.__currentSteplist.antisipateTime=anttime
+
+    def getAntisipateTime(self):
+        return(self.__currentSteplist.antisipateTime)
+
+    def setRestoreHp(self,hp):
+        self.__currentSteplist.restoreHp=hp
+
+    def getRestoreHp(self):
+        return(self.__currentSteplist.restoreHp)
 
     def setSteplistname(self, name):
         self.__currentSteplist.name=name
@@ -51,18 +68,21 @@ class Song(object):
     def getSteplistname(self):
         return(self.__currentSteplist.name)
 
+    def setStartHp(self, hp):
+        self.__currentSteplist.startHp=hp
+
     def getStartHp(self):
         return(self.__currentSteplist.startHp)
 
     def getStep(self,tick):
-        retorner = None 
+        retorner = []
         #escritor.escribirLog("buscando step en tick " + str(tick))
 
         for x in range(self.__currentStep,len(self.__currentSteplist.steps)):
             if self.__currentSteplist.steps[x][0] == tick:
                 #escritor.escribirLog("tick encontrado")
 
-                retorner = self.__currentSteplist.steps[x]
+                retorner.append(self.__currentSteplist.steps[x])
                 self.__currentStep=x
 
         #escritor.escribirLog("se retornará " + str(retorner))
@@ -78,11 +98,17 @@ class Song(object):
     def saveSteplist(self):
         self.__steps.append(self.__currentSteplist)
 
+    def deleteSteplist(self, index):
+        if index < len(self.__steps):
+            self.__steps.pop(index)
+
+
     def str(self):
         return self.__name
 
     def getAllStepslist(self):
         return self.__steps
+
     def getAllSteps(self):
         return(self.__currentSteplist.steps)
 

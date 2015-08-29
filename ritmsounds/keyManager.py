@@ -5,6 +5,7 @@ from pygame.locals import *
 import escritor
 import jsonpickle
 import soundevents
+import speechManager
 
 keys = {
     'left': K_LEFT,
@@ -51,12 +52,22 @@ def loadKeys():
 
 
 def getKey(key):
+    if key==K_LCTRL or key==K_RCTRL:
+        speechManager.stop()
+        return("stop")
+
+
     for k in keys.items():
         if k[1] == key:
             escritor.flog("se detecto un:  "+k[0])
             return(k[0])
     return('null')
 
+
+
+def getConfiguredKey(key):
+    if key in keys.keys():
+        return(keys[key])
 
 
 

@@ -5,6 +5,7 @@ import pygame
 from pygame.locals import *
 import escritor
 import keyManager
+import messagesManager as m
 
 def endSong():
     global end
@@ -23,18 +24,17 @@ def startWindow( width, height,cancion):
     global end
     end = False
     pantalla.fill((134,230,120))
-    letras = pygame.font.Font(None, 14)
-    mensaje = "precione las teclas a, s, z y x al ritmo de la canción y como quiera para grabar los pasos!"
-    mensaje2 = "Precione escape para retornar al menú y abortar la grabación"
-    msj1 = letras.render(mensaje,1,(255,255,255), (100,100,100))
-    msj2 = letras.render(mensaje2,1,(255,255,255))
     
-    pantalla.blit(msj1, (50,10))
-    pantalla.blit(msj2,(50,60))
+    
+    mensaje = m.getMessage('recordwindow:help', pygame.key.name(keyManager.getConfiguredKey("back")))
+    
     pygame.display.flip()
+    m.sayCustomMessage(mensaje,1)
     
     jugo.start()
     juego.endSongEvent+=endSong
+    
+
 
     while (not end):
         reloj.tick_busy_loop(60)
@@ -46,9 +46,10 @@ def startWindow( width, height,cancion):
                 pygame.display.quit()
                 end=True
                 jugo.stop()
-                del jugo
+                
                 escritor.flog("cierre modo prueba por evento de salida")
                 escape=True
+                return(None)
             elif (event.type == pygame.KEYDOWN):
                 pressKey = keyManager.getKey(event.key)
                 if pressKey!='back' and pressKey!='null':
@@ -60,26 +61,13 @@ def startWindow( width, height,cancion):
                     escritor.flog("cierre por escape")
                     
                     jugo.stop()
-                    del jugo
+                    
                     end=True
                     escape=True
+                    return(None)
 
     pygame.display.quit()
     if escape == False:
 
         jugo.stop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return(jugo.getSong())

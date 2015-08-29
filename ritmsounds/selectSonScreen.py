@@ -6,6 +6,7 @@ import soundevents
 from pygame.locals import *
 import escritor
 import time
+import messagesManager as m
 
 
 def startWindow( width, height):
@@ -13,45 +14,46 @@ def startWindow( width, height):
     pygame.init()
     pygame.display.set_caption("RitmSounds: main menu")
     pantalla = pygame.display.set_mode(res)
-    escritor.flog("Iniciado menu principal")
+    escritor.flog("iniciada pantalla de seleccion")
     reloj = pygame.time.Clock()
     end = False
     pantalla.fill((134,230,120))
-    letras = pygame.font.Font(None, 14)
-    letrasGrandes = pygame.font.Font(None, 20)
+    
+    
     menuitems=[]
     songs = escritor.loadAllSongs()
 
-    mensaje = "Jugar una cancion"
-    mensaje2 = "Grabar una cancion"
-    mensaje3 = "Provar teclas"
-    mensaje4 = "Salir"
-    mensajeTitulo = "Seleccione la cancion que quiere jugar. Escoja con las flechas y acepte con enter"
+    mensage = m.getMessage("selectwindow:help")
+    mensage2 = m.getMessage("selectwindow:help2")
+    mensage3 = m.getMessage("selectwindow:help3", pygame.key.name(keyManager.getConfiguredKey("l1")), pygame.key.name(keyManager.getConfiguredKey("l2")), pygame.key.name(keyManager.getConfiguredKey("l3")), pygame.key.name(keyManager.getConfiguredKey("l4")), pygame.key.name(keyManager.getConfiguredKey("r1")), pygame.key.name(keyManager.getConfiguredKey("r2")), pygame.key.name(keyManager.getConfiguredKey("r3")), pygame.key.name(keyManager.getConfiguredKey("r4")))
 
-    menuitems.append(letras.render(mensaje,1,(255,255,255), (100,100,100)))
-    menuitems.append(letras.render(mensaje2,1,(255,255,255), (100,100,100)))
-    menuitems.append(letras.render(mensaje3,1,(255,255,255), (100,100,100)))
-    menuitems.append(letras.render(mensaje4,1,(255,255,255), (100,100,100)))
-    titulo = letrasGrandes.render(mensajeTitulo,1,(255,255,255), (100,100,100))
-    pantalla.blit(titulo, (50,50))
-    
+
     pygame.display.flip()
     estitulo =True
+    esayuda=False
     
 
     
     option=0
+    m.sayCustomMessage(mensage,1)
+    repeat = mensage
+    dificultad = 0 
+
+    if len(songs) == 0:
+        m.sayMessage("selectwindow:nosongs",1)
+        return(None)
+
+    soundevents.musicLoad(songs[option].songpath)
+    soundevents.musicPlay(-1)
+    m.sayCustomMessage(songs[option].name,0)
+
+
     while (not end):
         reloj.tick(60)
         pantalla.fill((134,230,120))
-        if estitulo:
-            pantalla.blit(titulo, (400,250))
-        else:
-            songname = letras.render(songs[option].name ,1,(255,255,255), (100,100,100))
-            pantalla.blit(songname, (400,300))
-    
         pygame.display.flip()
-        
+        soundevents.musicSetVolume(0.2)
+
 
         for event in pygame.event.get():
             if (event.type == pygame.quit):
@@ -64,60 +66,106 @@ def startWindow( width, height):
                 if pressKey== 'accept':
                     
                     soundevents.playAccept()
-                    if estitulo==True:
+                    if estitulo==True and esayuda== False:
                         estitulo=False
-                        soundevents.musicLoad(songs[option].songpath)
-                        soundevents.musicPlay(True)
+                        m.sayCustomMessage(mensage2,1)
+                        repeat=mensage2
+                        songs[option].selectSteplist(dificultad)
+                        h = songs[option].getHands()
+                        if h ==2:
+                            m.sayMessage('selectwindow:difdescription2', 0, songs[option].getSteplistname(), songs[option].getStartHp(), songs[option].getPressSpeed())
+                        else:
+                            m.sayMessage('selectwindow:difdescription', 0, songs[option].getSteplistname(), songs[option].getStartHp(), songs[option].getPressSpeed())
+
+                        
+                    elif estitulo==False and esayuda == False:
+                        esayuda = True
+                        m.sayCustomMessage(mensage3,1)
+                        repeat = mensage3
 
 
                     else:
+                        soundevents.playGoSound()
                         pygame.display.quit()
                         end=True
                         soundevents.musicFade(1500)
                         return(songs[option])
                 elif pressKey == 'down':
                     if estitulo:
-                        continue 
+                        
 
-                    soundevents.playMove()
-                    option+=1
-                    if option>=len(songs):
-                        option=0
-                    soundevents.musicLoad(songs[option].songpath)
-                    soundevents.musicPlay(True)
+                        soundevents.playMove()
+                        option+=1
+                        if option>=len(songs):
+                            option=0
+                        soundevents.musicLoad(songs[option].songpath)
+                        soundevents.musicPlay(-1)
+                        m.sayCustomMessage(songs[option].name,1)
 
 
+                    elif estitulo == False and esayuda:
+                        continue
+                    else:
+                        soundevents.playChange()
+                        dificultad+=1
+                        if dificultad>= len(songs[option].getAllStepslist()):
+                            dificultad=0
+                        songs[option].selectSteplist(dificultad)
+                        h = songs[option].getHands()
+                        if h ==2:
+                            m.sayMessage('selectwindow:difdescription2', 1, songs[option].getSteplistname(), songs[option].getStartHp(), songs[option].getPressSpeed())
+                        else:
+                            m.sayMessage('selectwindow:difdescription', 1, songs[option].getSteplistname(), songs[option].getStartHp(), songs[option].getPressSpeed())
 
                 elif pressKey == 'up':
                     if estitulo:
-                        continue 
+                        
 
-                    soundevents.playMove()
-                    option -= 1 
-                    if option<0:
-                        option=len(songs)-1
-                    soundevents.musicLoad(songs[option].songpath)
-                    soundevents.musicPlay(True)
+                        soundevents.playMove()
+                        option -= 1 
+                        if option<0:
+                            option=len(songs)-1
+                        soundevents.musicLoad(songs[option].songpath)
+                        soundevents.musicPlay(-1)
+                        m.sayCustomMessage(songs[option].name,1)
+
+
+                    elif esayuda:
+                        continue
+                    else:
+                        soundevents.playChange()
+                        dificultad-=1
+                        if dificultad< 0:
+                            dificultad=len(songs[option].getAllStepslist())-1
+                        songs[option].selectSteplist(dificultad)
+                        h = songs[option].getHands()
+                        if h ==2:
+                            m.sayMessage('selectwindow:difdescription2', 1, songs[option].getSteplistname(), songs[option].getStartHp(), songs[option].getPressSpeed())
+                        else:
+                            m.sayMessage('selectwindow:difdescription', 1, songs[option].getSteplistname(), songs[option].getStartHp(), songs[option].getPressSpeed())
+
+                        
 
 
                 elif(pressKey=='back'):
-                    pygame.display.quit()
-                    escritor.flog("cierre por escape")
-                    end=True
+                    if estitulo:
+
+                        pygame.display.quit()
+                        escritor.flog("cierre por escape")
+                        end=True
+                    else:
+                        estitulo=True
+                        esayuda=False
+                        option=0
+                        dificultad=0
+                        repeat= mensage
+                        m.sayCustomMessage(mensage,1)
+                        soundevents.musicLoad(songs[option].songpath)
+                        soundevents.musicPlay()
+                        m.sayCustomMessage(songs[option].name,0)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                else:
+                    if pressKey!="stop":
+                        m.sayCustomMessage(repeat)

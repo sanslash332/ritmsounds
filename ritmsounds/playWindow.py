@@ -11,7 +11,7 @@ def endSong():
     end = True
 
 
-def startWindow( width, height,cancion):
+def startWindow( width, height,cancion, modo=0):
     res = (width,height)
     pygame.init()
     pygame.display.set_caption("Modo juego!")
@@ -19,19 +19,17 @@ def startWindow( width, height,cancion):
     pantalla = pygame.display.set_mode(res)
     escritor.flog("iniciado modo de juego de la canción: " + cancion.name)
     
-    jugo = juego.Juego(cancion,1,1)
+    jugo = juego.Juego(cancion,1,modo)
     reloj = pygame.time.Clock()
     global end
     end = False
     pantalla.fill((134,230,120))
-    letras = pygame.font.Font(None, 14)
+    
     mensaje = "precione las teclas a, s, z y x al ritmo de la canción a medida que el sonido correspondiente suena!!!"
     mensaje2 = "Precione escape para retornar al menú y detener el juego"
-    msj1 = letras.render(mensaje,1,(255,255,255), (100,100,100))
-    msj2 = letras.render(mensaje2,1,(255,255,255))
     
-    pantalla.blit(msj1, (50,10))
-    pantalla.blit(msj2,(50,60))
+    
+    
     pygame.display.flip()
     
     jugo.start()
