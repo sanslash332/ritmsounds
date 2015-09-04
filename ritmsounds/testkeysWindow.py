@@ -7,6 +7,7 @@ import escritor
 import keyManager
 import soundevents
 import messagesManager as m
+import time
 
 def startWindow( width, height):
     res = (width,height)
@@ -22,6 +23,7 @@ def startWindow( width, height):
     
     
     pygame.display.flip()
+    time.sleep(1)
     m.sayCustomMessage(mensage,1)
 
 

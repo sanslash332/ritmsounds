@@ -33,7 +33,7 @@ def startWindow( width, height):
     
     soundevents.musicLoad("songs/rtms.ogg")
     soundevents.musicPlay(True)
-    soundevents.musicSetVolume(0.3)
+    soundevents.musicSetVolume(0.4)
 
     
     option=0
