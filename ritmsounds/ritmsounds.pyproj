@@ -33,6 +33,9 @@
     <Compile Include="keyManager.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="survivorResultsWindow.py" />
+    <Compile Include="survivorPauseWindow.py" />
+    <Compile Include="survivorMenuScreen.py" />
     <Compile Include="menuScreen.py">
       <SubType>Code</SubType>
     </Compile>
@@ -40,6 +43,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="playWindow.py" />
+    <Compile Include="survivorManager.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="recordMenuScreen.py">
       <SubType>Code</SubType>
     </Compile>

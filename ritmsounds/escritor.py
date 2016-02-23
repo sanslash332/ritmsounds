@@ -9,7 +9,7 @@ import song
 
 flog = eventos.Event()
 
-logoff=True
+logoff=False
 def saveSong(song):
     """Método para escribir en un archivo rtms los pasos y ticks correspondientes de una cancion"""
     nombre = song.songpath
@@ -31,7 +31,7 @@ def saveSong(song):
 def escribirLog(datos):
     if logoff==False:
 
-        archlog = open("log.log", 'a')
+        archlog = open("ritmsounds.log", 'a')
         archlog.write(str(datetime.datetime.now()) +  ":" + datos + "\n")
         archlog.flush()
         archlog.close()

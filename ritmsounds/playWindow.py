@@ -11,7 +11,7 @@ def endSong():
     end = True
 
 
-def startWindow( width, height,cancion, modo=0):
+def startWindow( width, height,cancion, modo=0, startHP=-1, restoreHpInPlay=True):
     res = (width,height)
     pygame.init()
     pygame.display.set_caption("Modo juego!")
@@ -19,7 +19,7 @@ def startWindow( width, height,cancion, modo=0):
     pantalla = pygame.display.set_mode(res)
     escritor.flog("iniciado modo de juego de la canción: " + cancion.name)
     
-    jugo = juego.Juego(cancion,1,modo)
+    jugo = juego.Juego(cancion,1,modo, startHP,restoreHpInPlay)
     reloj = pygame.time.Clock()
     global end
     end = False
@@ -50,7 +50,7 @@ def startWindow( width, height,cancion, modo=0):
                 escape=True
             elif (event.type == pygame.KEYDOWN):
                 pressKey = keyManager.getKey(event.key)
-                if pressKey!='back' and pressKey!='null':
+                if pressKey!='back' and pressKey!='null' and pressKey !='stop':
 
                     juego.stepEvent(pressKey)
                     escritor.flog("precionada la tecla " + pressKey)

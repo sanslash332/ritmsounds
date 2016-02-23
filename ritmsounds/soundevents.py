@@ -21,6 +21,7 @@ musicPos = mixer.music.get_pos
 
 mixer.set_num_channels(16)
 twoHands = 1
+survivorJump = False
 __hitsounds = {'l1': mixer.Sound("sfx/hit0.wav"), 'l2': mixer.Sound("sfx/hit1.wav"), 'l3': mixer.Sound("sfx/hit2.wav"), 'l4': mixer.Sound("sfx/hit3.wav"),'r1': mixer.Sound("sfx/hit0.wav"), 'r2': mixer.Sound("sfx/hit1.wav"), 'r3': mixer.Sound("sfx/hit2.wav"), 'r4': mixer.Sound("sfx/hit3.wav")}
 __startsound = mixer.Sound("sfx/start.wav")
 __beepSound = mixer.Sound("sfx/beep.wav")
@@ -33,6 +34,10 @@ __deathSound = mixer.Sound("sfx/death.wav")
 __lowHpSound = mixer.Sound("sfx/lowhp.wav")
 __damageSound = mixer.Sound("sfx/damage.wav")
 __restoreHP = mixer.Sound("sfx/restorehp.wav")
+__survivorStart = mixer.Sound("sfx/survivorstart.ogg")
+
+def playSurvivorStart():
+    __survivorStart.play()
 
 def playDamage():
     __damageSound.play()
@@ -82,6 +87,9 @@ def playGoSound():
 
 
 def __playStartSound():
+    if survivorJump==True:
+        return()
+
     __beepSound.play()
     
     time.sleep(1)

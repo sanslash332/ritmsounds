@@ -36,7 +36,7 @@ class Juego(object):
 
 
         if self.consecutivePoints==self.__song.getRestoreHp():
-            if self.player.getHP() < self.__song.getStartHp():
+            if self.player.getHP() < self.__song.getStartHp() and self.restoreHPInPlay==True:
                 self.player.setHP(self.player.getHP()+1)
                 soundevents.playRestoreHP()
             self.consecutivePoints=0
@@ -187,8 +187,9 @@ class Juego(object):
 
         
 
-    def __init__(self, cancion, modo, tipo= 0, jpugador = jugador.Jugador()):
+    def __init__(self, cancion, modo, tipo= 0, startHP =-1, restoreHpInPlay=True):
         object.__init__(self)
+        self.player= jugador.Jugador()
         self.__ticks=0
         global hitEvent
         global nextTickEvent
@@ -199,10 +200,16 @@ class Juego(object):
 
         self.__song = cancion
         
-        self.player=jpugador
+        
         self.player.resetPoints()
+        self.restoreHPInPlay = restoreHpInPlay
+        if startHP!= -1:
+            self.player.setHP(startHP)
+        else:
 
-        self.player.setHP(self.__song.getStartHp())
+
+
+            self.player.setHP(self.__song.getStartHp())
         soundevents.musicSetVolume(1)
         soundevents.musicLoad(self.__song.songpath)
         self.__pressSpeed = self.__song.getPressSpeed()

@@ -9,7 +9,8 @@ _defaultMessages = {
     'menuwindow:option0': 'jugar una canción',
     'menuwindow:option1': 'practicar una canción',
     'menuwindow:option2': 'aprender los sonidos de las teclas',
-    'menuwindow:option3': 'grabar las teclas de una canción',
+    'menuwindow:option3': '¡Supervivencia! ¡Baila hasta morir!',
+    'menuwindow:option4': 'grabar las teclas de una canción',
     'menuwindow:optionexit': 'salir del juego',
     'selectwindow:help': 'Seleccione canción a jugar. utilice las flechas para seleccionar la canción que desea jugar, y luego precione enter para empezar',
     'selectwindow:help2': 'Selección de dificultad. Seleccione seleccione qué dificultad de esta canción desea jugar. luego precione enter',
@@ -47,6 +48,20 @@ _defaultMessages = {
     'confirm': 'Sí',
     'cancel': 'No',
     'test': 'provar pasos',
+    'survivormenu:help': '¡bienvenido al modo supervivencia! Ajusta las opciones y luego presiona en proceder. Para desplasarte usa las flechas, y para ajustar valores presiona enter. ¿cuánto aguantarás? ',
+    'survivormenu:option0': 'Cantidad máxima de vida (máximo 100): %0',
+    'survivormenu:option1': '¿Colocar pausa e información entre canciones? %0',
+    'survivormenu:option2': '¿Recuperar el total del máximo de vida entre cada canción? %0',
+    'survivormenu:option3': '¿Permitir recuperar vida durante las canciones al ejecutar la cantidad de pasos correctos pre configurado en la dificultad de la canción? %0',
+    'survivormenu:optionconfirm': '¡Vive! Si puedes',
+    'survivormenu:errorzero': '¡La vida máxima no puede valer menos de cero ni más de 100!',
+    'survivorpausewindow:message0': '¡felicidades! canción pasada! Tu vida restante es %0. Presiona enter para continuar. ',
+    'survivorpausewindow:message1': '¡felicidades! canción pasada! Tu vida ha sido restaorada a %0. Presiona enter para continuar.',
+    'survivorpausewindow:message2': 'La siguiente canción es %0 en dificultad %1. Presiona enter para iniciar. ¡buena suerte!',
+    'survivorresultswindow:message0': '¡Vaya! ¡Parece que no pudiste sobrevivir más! Es una lástima. Lograste completar %0 canciones, opteniendo una colección total de %1 puntos entre todas ellas.',
+
+
+
 
 
     

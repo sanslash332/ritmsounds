@@ -14,6 +14,7 @@ import playWindow
 import menuScreen
 import selectSonScreen
 import recordMenuScreen
+import survivorMenuScreen
 import os
 
 
@@ -21,14 +22,14 @@ screen_width = 1024
 screen_height =768
 def start():
     songs_dir = "songs/"
-    option = -1 
+    option = -10 
     pg.init()
-    pg.display.set_caption("tiflojuegos")
+    pg.display.set_caption("tiflojuegos.com presents")
     pg.display.set_mode((1024,768))
 
     soundevents.musicLoad("bgm/tiflojuegoslogo.ogg")
     soundevents.musicPlay()
-
+    escritor.escribirLog("reproduciendo logo")
     while soundevents.musicIsPlay():
         for ev in pg.event.get():
             if ev.type==pg.KEYDOWN:
@@ -37,8 +38,9 @@ def start():
 
 
 
-
-    while option!=4:
+    escritor.escribirLog("iniciando mainloop")
+    while option!= -1:
+        escritor.escribirLog("lanzando menú ")
         option = menuScreen.startWindow(screen_width,screen_height)
         escritor.flog("capturada la opcion: "+ str(option) + " en el menu ")
         if option==0 or option==1:
@@ -54,7 +56,14 @@ def start():
 
         elif option == 2:
             testkeysWindow.startWindow(screen_width,screen_height)
-        elif option == 3:
+        elif option==3:
+            svm= survivorMenuScreen.startWindow(screen_width,screen_height)
+            if svm!=None:
+
+                svm.surviveStart()
+
+
+        elif option == 4:
             recordMenuScreen.startWindow(1024,768)
 
 
