@@ -8,6 +8,7 @@ import easy_install
 import py2exe
 import sys
 import json
+import simplejson
 
 
 PYGAME_DIR = os.path.join(os.path.split(sys.executable)[0], "Lib\site-packages\pygame")
@@ -47,6 +48,7 @@ setup(windows=["ritmsounds.py"],
       'bundle_files': 1,
       #'excludes': ['tkinter', '_tkinter', 'Tkinter', ], 
       'dll_excludes': ['libiomp5md.dll',],
+      'includes': ['simplejson',],
 } },
 ##      zipfile = None,
       )
