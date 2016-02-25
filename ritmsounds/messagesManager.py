@@ -53,6 +53,7 @@ _defaultMessages = {
     'survivormenu:option1': '¿Colocar pausa e información entre canciones? %0',
     'survivormenu:option2': '¿Recuperar el total del máximo de vida entre cada canción? %0',
     'survivormenu:option3': '¿Permitir recuperar vida durante las canciones al ejecutar la cantidad de pasos correctos pre configurado en la dificultad de la canción? %0',
+    'survivormenu:option4': '¿Rango de hp de recuperación determinado por cada canción y su dificultad? %0',
     'survivormenu:optionconfirm': '¡Vive! Si puedes',
     'survivormenu:errorzero': '¡La vida máxima no puede valer menos de cero ni más de 100!',
     'survivorpausewindow:message0': '¡felicidades! canción pasada! Tu vida restante es %0. Presiona enter para continuar. ',

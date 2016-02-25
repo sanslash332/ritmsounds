@@ -20,6 +20,7 @@ class SurvivorManager:
         self.restoreAllHp = False
         self.restoreHpInSongs = True
         self.pauseBetweenSongs = False
+        self.HPRestoreRangeDeterminedBySong = True
         self.songs=escritor.loadAllSongs()
         self.completedSongs = 0
         self.currentHP = -1
@@ -39,7 +40,7 @@ class SurvivorManager:
             if s ==None:
                 break
 
-            self.lastGame= playWindow.startWindow(1024,768, s, 0, startHP=self.currentHP, restoreHpInPlay=self.restoreHpInSongs)
+            self.lastGame= playWindow.startWindow(1024,768, s, 0, startHP=self.currentHP, restoreHpInPlay=self.restoreHpInSongs, maxHP= self.maxHP)
             if self.lastGame==None:
                 break
             self.currentHP= self.lastGame.player.getHP()
@@ -61,14 +62,17 @@ class SurvivorManager:
         dificulti= random.randint(0,len(currentSong.getAllStepslist())-1)
         currentSong.selectSteplist(dificulti)
         currentSong.restartSong()
+        if self.HPRestoreRangeDeterminedBySong==False:
+            currentSong.setStartHp(self.maxHP)
         
         if self.pauseBetweenSongs==True and firstsong==False:
             o = survivorPauseWindow.startWindow(1024,768, currentSong,self.currentHP, self.completedSongs, self.restoreAllHp)
             if o == -1:
                 return(None)
         else:
+            
             soundevents.playSurvivorStart()
-            time.sleep(3)
+            time.sleep(2)
 
 
 

@@ -62,7 +62,7 @@ def startWindow( width, height):
                         soundevents.musicStop()
 
                         soundevents.playSurvivorStart()
-                        time.sleep(3)
+                        time.sleep(2)
 
                         return(svm)
                         escritor.flog("survivor configurado")
@@ -84,6 +84,10 @@ def startWindow( width, height):
                     elif option ==3:
                         soundevents.playChange()
                         svm.restoreHpInSongs= not svm.restoreHpInSongs
+                    elif option==4:
+                        soundevents.playChange()
+                        svm.HPRestoreRangeDeterminedBySong= not svm.HPRestoreRangeDeterminedBySong
+
 
 
 
@@ -96,7 +100,7 @@ def startWindow( width, height):
                     soundevents.playMove()
                     option+=1
                     escritor.flog("movida opción a %i " % option)
-                    if option>=4:
+                    if option>=5:
                         option=-1
                         escritor.flog("movida opción a %i " % option)
 
@@ -110,7 +114,7 @@ def startWindow( width, height):
                     option -= 1
                     escritor.flog("movida opción a %i " % option)
                     if option< -1:
-                        option=3
+                        option=4
                         escritor.flog("movida opción a %i " % option)
                     m.sayCustomMessage(menuitems[option])
 
@@ -146,6 +150,12 @@ def _buildmenu(svm):
     
     
 
+    
+    if svm.HPRestoreRangeDeterminedBySong==True:
+        menuitems.append(m.getMessage("survivormenu:option4", m.getMessage("confirm")))
+    else:
+        menuitems.append(m.getMessage("survivormenu:option4", m.getMessage("cancel")))
+    
     
     menuitems.append(m.getMessage("survivormenu:optionconfirm"))
     return(menuitems)

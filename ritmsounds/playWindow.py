@@ -11,7 +11,7 @@ def endSong():
     end = True
 
 
-def startWindow( width, height,cancion, modo=0, startHP=-1, restoreHpInPlay=True):
+def startWindow( width, height,cancion, modo=0, startHP=-1, restoreHpInPlay=True, maxHP=-1 ):
     res = (width,height)
     pygame.init()
     pygame.display.set_caption("Modo juego!")
@@ -19,7 +19,7 @@ def startWindow( width, height,cancion, modo=0, startHP=-1, restoreHpInPlay=True
     pantalla = pygame.display.set_mode(res)
     escritor.flog("iniciado modo de juego de la canción: " + cancion.name)
     
-    jugo = juego.Juego(cancion,1,modo, startHP,restoreHpInPlay)
+    jugo = juego.Juego(cancion,1,modo, startHP,restoreHpInPlay, maxHP)
     reloj = pygame.time.Clock()
     global end
     end = False

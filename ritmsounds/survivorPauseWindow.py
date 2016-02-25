@@ -62,6 +62,7 @@ def startWindow( width, height, cansion, hpactual, completadas, hprecuperado):
                         pygame.display.quit()
                         escritor.flog("cierre por escape")
                         end=True
+                        soundevents.musicStop()
                         soundevents.playSurvivorStart()
                         time.sleep(2)
                         return(0)
