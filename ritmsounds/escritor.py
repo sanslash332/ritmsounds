@@ -87,17 +87,6 @@ def loadAllTotalItems():
 
 
             
-        elif s.endswith(".mp3"):
-            sd = s[:s.index(".mp3")]
-            js=song.Song(sd,"songs/"+s)
-            ent=True
-            for ss in songs:
-                if js.name==ss.name:
-                    ent=False
-
-            if ent:
-
-                songs.append(js)
-
+        
 
     return(songs)

@@ -21,7 +21,12 @@ keys = {
     'r1': K_u,
     'r2': K_i,
     'r3': K_j,
-    'r4': K_k
+    'r4': K_k,
+    'voldown': K_F5,
+    'volup': K_F6,
+    'volmusicdown': K_F7,
+    'volmusicup': K_F8,
+    'stop': K_LCTRL
     }
 
 
@@ -60,7 +65,28 @@ def getKey(key):
     for k in keys.items():
         if k[1] == key:
             escritor.flog("se detecto un:  "+k[0])
-            return(k[0])
+            if k[0]=='volmusicdown':
+                soundevents.musicSetVolume(-0.1)
+                return("stop")
+                
+            elif k[0]=='volmusicup':
+                soundevents.musicSetVolume(0.1)
+                return("stop")
+            elif k[0]=='volup':
+                soundevents.setSfxVolume(0.1)
+                soundevents.playChange()
+                return("stop")
+            elif k[0]=='voldown':
+                soundevents.setSfxVolume(-0.1)
+                soundevents.playChange()
+                return("stop")
+
+
+
+
+
+            else:
+                return(k[0])
     return('null')
 
 

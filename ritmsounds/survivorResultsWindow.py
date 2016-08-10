@@ -24,8 +24,8 @@ def startWindow( width, height, canciones, puntos):
     pantalla.fill((134,230,120))
     
     soundevents.musicLoad("bgm/results.mp3")
-    soundevents.musicSetVolume(0.5)
-    soundevents.musicPlay(-1)
+    #soundevents.musicSetVolume(0.5)
+    soundevents.musicPlay(True)
     mensaje = m.getMessage('survivorresultswindow:message0', canciones, puntos)
 
     

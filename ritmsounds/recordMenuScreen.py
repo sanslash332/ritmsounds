@@ -56,7 +56,7 @@ def startWindow( width, height):
         reloj.tick(60)
         pantalla.fill((134,230,120))
         pygame.display.flip()
-        soundevents.musicSetVolume(0.2)
+        #soundevents.musicSetVolume(0.4*soundevents.musicVolume)
 
 
         for event in pygame.event.get():
@@ -140,7 +140,7 @@ def _selectDif(song):
         reloj.tick(60)
         pantalla.fill((134,230,120))
         pygame.display.flip()
-        soundevents.musicSetVolume(0.2)
+        #soundevents.musicSetVolume(0.2)
 
 
         for event in pygame.event.get():
@@ -296,7 +296,7 @@ def _configureNewDif(song):
         reloj.tick(60)
         pantalla.fill((134,230,120))
         pygame.display.flip()
-        soundevents.musicSetVolume(0.2)
+        #soundevents.musicSetVolume(0.2)
 
 
         for event in pygame.event.get():
@@ -317,7 +317,7 @@ def _configureNewDif(song):
                         else:
                             end=True
                             soundevents.playGoSound()
-                            soundevents.musicSetVolume(1)
+                            #soundevents.musicSetVolume(soundevents.musicVolume/0.5)
                             soundevents.musicFade(1500)
                             time.sleep(1)
                             song.resetSteps()
@@ -432,8 +432,8 @@ def _confirmNewDif(song):
 
     
     soundevents.musicLoad("bgm/results.mp3")
-    soundevents.musicPlay(-1)
-    soundevents.musicSetVolume(0.2)
+    soundevents.musicPlay(True)
+    #soundevents.musicSetVolume(0.2)
     m.sayCustomMessage(menuitems[option],0)
 
 
@@ -441,7 +441,7 @@ def _confirmNewDif(song):
         reloj.tick(60)
         pantalla.fill((134,230,120))
         pygame.display.flip()
-        soundevents.musicSetVolume(0.2)
+        #soundevents.musicSetVolume(0.2)
 
 
         for event in pygame.event.get():

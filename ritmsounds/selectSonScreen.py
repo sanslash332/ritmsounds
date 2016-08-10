@@ -44,7 +44,7 @@ def startWindow( width, height):
         return(None)
 
     soundevents.musicLoad(songs[option].songpath)
-    soundevents.musicPlay(-1)
+    soundevents.musicPlay(True)
     m.sayCustomMessage(songs[option].name,0)
 
 
@@ -52,7 +52,7 @@ def startWindow( width, height):
         reloj.tick(60)
         pantalla.fill((134,230,120))
         pygame.display.flip()
-        soundevents.musicSetVolume(0.2)
+        #soundevents.musicSetVolume(soundevents.musicVolume*0.5)
 
 
         for event in pygame.event.get():
@@ -88,6 +88,8 @@ def startWindow( width, height):
                         soundevents.playGoSound()
                         pygame.display.quit()
                         end=True
+                        #soundevents.musicSetVolume(soundevents.musicVolume/0.5)
+
                         soundevents.musicFade(1500)
                         return(songs[option])
                 elif pressKey == 'down':

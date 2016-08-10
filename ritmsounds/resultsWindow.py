@@ -22,20 +22,37 @@ def startWindow( width, height, jg):
 
 
     pantalla.fill((134,230,120))
+    aciertos = jg.player.getPuntos()
+    fallos = jg.player.getMiss()
+    nota=jg.calculateMark()
+    
+
+    puntos=jg.calculatePoints()
+    
+    
+    
     
     if jg.player.getHP() == 0:
         soundevents.musicLoad("bgm/death.mp3")
-        soundevents.musicPlay(-1)
-        mensaje = m.getMessage("resultswindow:death", jg.player.getPuntos())
+        m.sayMessage('resultswindow:start')
+        soundevents.playResults(int(puntos/5))
+
+        
+        mensaje = m.getMessage("resultswindow:death", puntos, aciertos)
     else:
         soundevents.musicLoad("bgm/results.mp3")
-        soundevents.musicSetVolume(0.5)
-        soundevents.musicPlay(-1)
-        mensaje = m.getMessage('resultswindow:congratulations', jg.player.getPuntos(), jg.player.getMiss(), jg.calculatePunctuation())
+        #soundevents.musicSetVolume(0.5)
+        
+        m.sayMessage('resultswindow:start')
+
+        soundevents.playResults(int(puntos/5))
+
+        mensaje = m.getMessage('resultswindow:congratulations', puntos, aciertos, fallos, nota)
 
     
     pygame.display.flip()
     m.sayCustomMessage(mensaje,1)
+    soundevents.musicPlay(-1)
 
 
 

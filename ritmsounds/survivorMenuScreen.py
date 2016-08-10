@@ -34,7 +34,7 @@ def startWindow( width, height):
     
     soundevents.musicLoad("bgm/survivor.ogg")
     soundevents.musicPlay(True)
-    soundevents.musicSetVolume(0.6)
+    #soundevents.musicSetVolume(0.6)
 
     
     option=0
