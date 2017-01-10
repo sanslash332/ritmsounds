@@ -4,7 +4,7 @@ import speechManager as sp
 import jsonpickle
 import escritor
 _defaultMessages = {
-    'menuwindow:title': 'Bienvenido a ritmsounds! Presione enter.',
+    'menuwindow:title': 'We are number one, but... ¡esto es ritmsounds!  Presione enter.',
     'menuwindow:help': 'Menú principal. Utilice las flechas para moverse en el menú, y luego presione enter para seleccionar',
     'menuwindow:option0': 'jugar una canción',
     'menuwindow:option1': 'practicar una canción',
@@ -21,7 +21,16 @@ _defaultMessages = {
     'resultswindow:start': '¡Y tus resultados son!',
     'resultswindow:congratulations': '¡felicitaciones! ¡has completado la canción! Optuviste un total de %0 puntos, con un total de %1 aciertos y %2 fallos. Has optenido una calificación de: %3',
     'resultswindow:death': '¡has perdido estrepitosamente! A penas optuviste un total de %0 puntos, con %1 aciertos.',
-    'testwindow:help': 'Pantalla de prueba de sonidos. para conocer los sonidos que equivalen a cada una de las teclas, utilize %0, %1, %2 y  %3 en la mano izquierda, y %4, %5, %6 y %7, en la mano derecha. Para regresar al menú, presione %8.',
+    'testwindow:help': 'Pantalla de prueba de sonidos. para conocer los sonidos que equivalen a cada una de las teclas, utilize %0, %1, %2 y  %3 en la mano izquierda, y %4, %5, %6 y %7, en la mano derecha. También puede recorrer el menú con abajo y arriba, y active las opciones con enter. Para regresar al menú, presione escape.',
+    'testwindow:menuitem0': 'Paso de tipo 1.',
+    'testwindow:menuitem1': 'paso de tipo2.',
+    'testwindow:menuitem2': 'Paso de tipo 3.',
+    'testwindow:menuitem3': 'Paso de tipo 4.',
+    'testwindow:menuitem4': 'Tienes menos de la mitad de tu hp.',
+    'testwindow:menuitem5': 'Has recuperado un punto de hp.',
+    'testwindow:menuitem6': 'has muerto.',
+    
+    'testwindow:menuitem7': 'Cuenta regresiva de inicio de canción',
     'recordwindow:help': 'Presione las teclas al ritmo de la canción para ir grabándolas. Presione %0 para cancelar',
     'text:help': 'escriba el texto. para finalizar, presione enter, o escape para cancelar',
     'text:empty': 'El mensage que puso está vacío. por favor escriba algo primero antes de aceptar',
@@ -61,6 +70,7 @@ _defaultMessages = {
     'survivorpausewindow:message1': '¡felicidades! canción pasada! Tu vida ha sido restaorada a %0. Presiona enter para continuar.',
     'survivorpausewindow:message2': 'La siguiente canción es %0 en dificultad %1. Presiona enter para iniciar. ¡buena suerte!',
     'survivorresultswindow:message0': '¡Vaya! ¡Parece que no pudiste sobrevivir más! Es una lástima. Lograste completar %0 canciones, opteniendo una colección total de %1 puntos entre todas ellas.',
+    'loadwindow:loading': 'cargando canciones, por favor espere',
 
 
 

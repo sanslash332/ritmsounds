@@ -7,6 +7,8 @@ from pygame.locals import *
 import escritor
 import time
 import messagesManager as m
+import loadWindow
+import threading
 
 
 def startWindow( width, height):
@@ -21,7 +23,20 @@ def startWindow( width, height):
     
     
     menuitems=[]
-    songs = escritor.loadAllSongs()
+    tred = threading.Thread(target=escritor.loadAllSongs)
+    tred.start()
+
+
+
+
+    #songs = escritor.loadAllSongs()
+    songs = loadWindow.startWindow(width,height,escritor.itemsLoaded)
+    if(songs==False):
+
+        return(None
+)
+
+
 
     mensage = m.getMessage("selectwindow:help")
     mensage2 = m.getMessage("selectwindow:help2")

@@ -11,6 +11,8 @@ import textInput
 import recordWindow
 import playWindow
 import time
+import loadWindow
+import threading
 
 mensage = m.getMessage("recordmenu:help")
 mensage2 = m.getMessage("recordmenu:help2")
@@ -32,7 +34,21 @@ def startWindow( width, height):
     
     
     menuitems=[]
-    songs = escritor.loadAllTotalItems()
+    tred = threading.Thread(target=escritor.loadAllTotalItems)
+    tred.start()
+
+
+
+
+    #songs = escritor.loadAllSongs()
+    songs = loadWindow.startWindow(width,height,escritor.itemsLoaded)
+    if(songs==False):
+
+        return(None
+)
+
+
+    #songs = escritor.loadAllTotalItems()
 
 
     pygame.display.flip()

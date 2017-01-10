@@ -19,12 +19,17 @@ def startWindow( width, height):
     end = False
     pantalla.fill((134,230,120))
     soundevents.twoHands=2
-    mensage = m.getMessage("testwindow:help", pygame.key.name(keyManager.getConfiguredKey("l1")), pygame.key.name(keyManager.getConfiguredKey("l2")), pygame.key.name(keyManager.getConfiguredKey("l3")), pygame.key.name(keyManager.getConfiguredKey("l4")), pygame.key.name(keyManager.getConfiguredKey("r1")), pygame.key.name(keyManager.getConfiguredKey("r2")), pygame.key.name(keyManager.getConfiguredKey("r3")), pygame.key.name(keyManager.getConfiguredKey("r4")), pygame.key.name(keyManager.getConfiguredKey("back")))
+    mensage = m.getMessage("testwindow:help", pygame.key.name(keyManager.getConfiguredKey("l1")), pygame.key.name(keyManager.getConfiguredKey("l2")), pygame.key.name(keyManager.getConfiguredKey("l3")), pygame.key.name(keyManager.getConfiguredKey("l4")), pygame.key.name(keyManager.getConfiguredKey("r1")), pygame.key.name(keyManager.getConfiguredKey("r2")), pygame.key.name(keyManager.getConfiguredKey("r3")), pygame.key.name(keyManager.getConfiguredKey("r4")), pygame.key.name(keyManager.getConfiguredKey("down")), pygame.key.name(keyManager.getConfiguredKey("up")), pygame.key.name(keyManager.getConfiguredKey("accept")), pygame.key.name(keyManager.getConfiguredKey("back")))
+    soundevents.musicLoad("bgm/test.ogg")
+    soundevents.musicPlay(True)
+
     
     
     pygame.display.flip()
     time.sleep(1)
     m.sayCustomMessage(mensage,1)
+    menu=buildMenu()
+    option=0
 
 
 
@@ -37,8 +42,24 @@ def startWindow( width, height):
                 escritor.flog("cierre modo prueba por evento de salida")
             elif (event.type == pygame.KEYDOWN):
                 pressKey = keyManager.getKey(event.key)
+                if pressKey=="up":
+                    soundevents.playMove()
+                    option-=1
+                    if option<0:
+                        option= len(menu)-1
+                    m.sayCustomMessage(menu[option])
 
-                if pressKey!= 'back' and pressKey!='null':
+                elif pressKey=="down":
+                    soundevents.playMove()
+                    option+=1
+                    if option >=len(menu):
+                        option=0
+                    m.sayCustomMessage(menu[option])
+
+                elif pressKey=="accept":
+                    activeOption(option)
+                    
+                elif pressKey!= 'back' and pressKey!='null':
                     juego.hitEvent(pressKey)
                     escritor.flog("precionada la tecla  " + pressKey)
 
@@ -48,3 +69,37 @@ def startWindow( width, height):
                     end=True
                 else:
                     m.sayCustomMessage(mensage,1)
+
+def buildMenu():
+    menu=[]
+    for x in range(0,8):
+        menu.append(m.getMessage("testwindow:menuitem"+str(x)))
+    return(menu)
+
+
+
+
+def activeOption(option):
+    if option==0:
+        juego.hitEvent("l1")
+        juego.hitEvent("r1")
+    elif option ==1:
+        juego.hitEvent("l2")
+        juego.hitEvent("r2")
+    elif option==2:
+        juego.hitEvent("l3")
+        juego.hitEvent("r3")
+    elif option==3:
+        juego.hitEvent("l4")
+        juego.hitEvent("r4")
+    elif option==4:
+        soundevents.playLowHp()
+    elif option==5:
+        soundevents.playRestoreHP()
+    elif option == 6:
+        soundevents.playdeath()
+    elif option ==7:
+        juego.startEvent()
+
+
+

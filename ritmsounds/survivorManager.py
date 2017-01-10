@@ -15,13 +15,13 @@ import survivorResultsWindow
 
 class SurvivorManager:
     """ class for control the survivor mode, and the random chooce of the songs, etc"""
-    def __init__(self):
+    def __init__(self,songs):
         self.maxHP = 30
         self.restoreAllHp = False
         self.restoreHpInSongs = True
         self.pauseBetweenSongs = False
         self.HPRestoreRangeDeterminedBySong = True
-        self.songs=escritor.loadAllSongs()
+        self.songs=songs
         self.completedSongs = 0
         self.currentHP = -1
         self.lastGame=None

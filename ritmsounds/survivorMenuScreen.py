@@ -9,6 +9,8 @@ import time
 import messagesManager as m
 import survivorManager
 import textInput
+import threading
+import loadWindow
 
 def startWindow( width, height):
     res = (width,height)
@@ -19,7 +21,23 @@ def startWindow( width, height):
     reloj = pygame.time.Clock()
     end = False
     pantalla.fill((134,230,120))
-    svm = survivorManager.SurvivorManager()
+    tred = threading.Thread(target=escritor.loadAllSongs)
+    tred.start()
+
+
+
+
+    #songs = escritor.loadAllSongs()
+    songs = loadWindow.startWindow(width,height,escritor.itemsLoaded)
+    if(songs==False):
+
+        return(None
+)
+
+
+
+
+    svm = survivorManager.SurvivorManager(songs)
     menuitems= _buildmenu(svm)
     
     escritor.flog("menú construido")

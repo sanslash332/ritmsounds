@@ -9,6 +9,7 @@ import song
 
 flog = eventos.Event()
 
+itemsLoaded = eventos.Event()
 logoff=False
 def saveSong(song):
     """Método para escribir en un archivo rtms los pasos y ticks correspondientes de una cancion"""
@@ -57,6 +58,7 @@ def loadAllSongs():
         if s.endswith(".rtms"):
             sd = s[:s.index(".rtms")]
             songs.append(loadSong("songs/"+sd))
+    itemsLoaded(songs)
     return(songs)
 
 
@@ -88,5 +90,5 @@ def loadAllTotalItems():
 
             
         
-
+    itemsLoaded(songs)
     return(songs)

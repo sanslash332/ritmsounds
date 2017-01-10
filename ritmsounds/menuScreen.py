@@ -71,7 +71,7 @@ def startWindow( width, height):
                             escritor.flog("detectada opción -1, cerrando menú")
                             pygame.display.quit()
                             soundevents.musicFade(1500)
-                            time.sleep(2)
+                            time.sleep(1)
                             
 
                             return(-1)
