@@ -63,7 +63,7 @@ def startWindow( width, height):
         m.sayMessage("selectwindow:nosongs",1)
         return(None)
 
-    soundevents.musicLoad(songs[option].songpath)
+    soundevents.loadSong(songs[option].songpath)
     soundevents.musicPlay(-1)
     m.sayCustomMessage(songs[option].name,0)
 
@@ -99,7 +99,7 @@ def startWindow( width, height):
                     option+=1
                     if option>=len(songs):
                         option=0
-                    soundevents.musicLoad(songs[option].songpath)
+                    soundevents.loadSong(songs[option].songpath)
                     soundevents.musicPlay(-1)
                     m.sayCustomMessage(songs[option].name,1)
 
@@ -112,7 +112,7 @@ def startWindow( width, height):
                     option -= 1 
                     if option<0:
                         option=len(songs)-1
-                    soundevents.musicLoad(songs[option].songpath)
+                    soundevents.loadSong(songs[option].songpath)
                     soundevents.musicPlay(-1)
                     m.sayCustomMessage(songs[option].name,1)
 

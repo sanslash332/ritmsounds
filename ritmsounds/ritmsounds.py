@@ -1,10 +1,25 @@
 #!/usr/bin/python
 # -*- coding: latin-1 -*-
+import os
+import sys
+import escritor
+
+if getattr(sys, 'frozen', False):
+    os.chdir(sys._MEIPASS)
+    escritor.songsdir=os.path.join(os.path.dirname(sys.executable),"songs")
+    escritor.logdir=os.path.dirname(sys.executable)
+
+else:
+    escritor.songsdir=os.path.join(os.path.dirname(os.path.realpath(__file__)), "songs")
+    escritor.logdir=os.path.dirname(os.path.realpath(__file__))
+
+
+
 import pygame as pg
 import juego
 import song
 import eventos
-import escritor
+
 import resultsWindow
 from pygame.locals import *
 import soundevents
@@ -15,7 +30,7 @@ import menuScreen
 import selectSonScreen
 import recordMenuScreen
 import survivorMenuScreen
-import os
+
 
 
 screen_width = 1024

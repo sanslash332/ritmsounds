@@ -9,3 +9,5 @@ songs/
 #archivos de log
 *.log
 *.rtms
+build/
+dist/

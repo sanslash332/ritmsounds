@@ -218,7 +218,7 @@ class Juego(object):
             self._maxHP=self.__song.getStartHp()
             
         #soundevents.musicSetVolume(1)
-        soundevents.musicLoad(self.__song.songpath)
+        soundevents.loadSong(self.__song.songpath)
         self.__pressSpeed = self.__song.getPressSpeed()
         #print(" este es el presspeed" + str(self.__pressSpeed))
         soundevents.twoHands=self.__song.getHands()

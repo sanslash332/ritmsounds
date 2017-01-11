@@ -15,6 +15,12 @@ ended=False
 def loadEnded(obj):
     global finalitem, ended
     finalitem=obj
+    if finalitem=="nosongs":
+        finalitem=False
+        m.sayMessage("selectwindow:nosongs")
+
+    
+
     ended=True
 
 
@@ -37,7 +43,7 @@ def startWindow( width, height, eventToWait):
 
     pantalla.fill((134,230,120))
     
-    soundevents.musicLoad("bgm/death.mp3")
+    soundevents.musicLoad("bgm/load.mp3")
     mensaje = m.getMessage("loadwindow:loading")
     
     

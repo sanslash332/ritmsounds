@@ -116,7 +116,7 @@ def _replaseArgs(mes, arreglo):
 
     for a in range(0,len(arreglo)):
         mes= mes.replace("%"+str(a),str(arreglo[a]))
-        escritor.flog("el mensage queda que va es: " + mes)
+        #escritor.flog("el mensage queda que va es: " + mes)
 
     return(mes)
 

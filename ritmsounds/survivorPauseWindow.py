@@ -26,7 +26,7 @@ def startWindow( width, height, cansion, hpactual, completadas, hprecuperado):
     
     
     pygame.display.flip()
-    soundevents.musicLoad(cansion.songpath)
+    soundevents.loadSong(cansion.songpath)
     soundevents.musicPlay()
     messagestate=0
     message = ""

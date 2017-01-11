@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: latin-1 -*-
+import os
 import eventos
 import pygame as PG
 from pygame import mixer
@@ -21,6 +22,10 @@ musicIsPlay = mixer.music.get_busy
 musicSetPos = mixer.music.set_pos
 musicPos = mixer.music.get_pos
 sfxVolume = 0.6
+
+def loadSong(s):
+    escritor.flog("cargando cancion en: " + os.path.join(escritor.logdir,s))
+    musicLoad(os.path.join(escritor.logdir,s))
 
 def musicPlay(loop=False):
     _musicPlay(loop)
