@@ -3,6 +3,7 @@
 block_cipher = None
 
 files = [
+('*.dll', ''),
 ('bgm', 'bgm'),
 ('sfx', 'sfx')
 ]

@@ -19,13 +19,14 @@ def saveSong(song):
     """Método para escribir en un archivo rtms los pasos y ticks correspondientes de una cancion"""
     nombre = song.songpath
 
-    if (os.path.isfile(song.songpath+".rtms") == True):
+    if (os.path.isfile(os.path.join(logdir, song.songpath+".rtms")) == True):
         try:
-            os.remove(song.songpath+".rtms")
+            os.remove(os.path.join(logdir,song.songpath+".rtms"))
         except Exception:
+            flog("no se pudo borrar el archivo antiguo, generando uno nuevo ")
             nombre = nombre+"new"
 
-    archivo = open(nombre + ".rtms", 'w')
+    archivo = open(os.path.join(logdir, nombre + ".rtms"), 'w')
     archivo.write(song.genJson())
 
     
