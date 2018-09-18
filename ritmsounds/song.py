@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+
 import pygame as pg
 from pygame.mixer import music
 import escritor
@@ -7,7 +7,7 @@ import steplist
 import jsonpickle
 
 class Song(object):
-    """Clase que representa a una canción del juego, tanto para reproducirla, como para interpretar / manejar sus pasos."""
+    """Clase que representa a una canciÃ³n del juego, tanto para reproducirla, como para interpretar / manejar sus pasos."""
 
     def __init__(self, name, songpath, steps = None):
 
@@ -85,13 +85,13 @@ class Song(object):
                 retorner.append(self.__currentSteplist.steps[x])
                 self.__currentStep=x
 
-        #escritor.escribirLog("se retornará " + str(retorner))
+        #escritor.escribirLog("se retornarï¿½ " + str(retorner))
         return retorner
 
 
 
     def loadSteps(self, steps):
-        """método que sirve para cargar unos pasos a la dificultad actual de la canción actual"""
+        """mÃ©todo que sirve para cargar unos pasos a la dificultad actual de la canciÃ³n actual"""
         self.__currentSteplist.steps= steps
 
 

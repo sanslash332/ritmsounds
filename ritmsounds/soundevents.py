@@ -1,12 +1,12 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+
 import os
 import eventos
 import pygame as PG
 from pygame import mixer
 import juego
 import time
-mixer.init(frequency=22050, size=-16, channels=2, buffer=128)
+mixer.init(frequency=44100, size=-16, channels=2, buffer=512)
 import escritor
 
 musicLoad = mixer.music.load
@@ -79,7 +79,7 @@ def musicSetVolume(newvalue):
 mixer.set_num_channels(16)
 twoHands = 1
 survivorJump = False
-__hitsounds = {'l1': mixer.Sound("sfx/hit0.wav"), 'l2': mixer.Sound("sfx/hit1.wav"), 'l3': mixer.Sound("sfx/hit2.wav"), 'l4': mixer.Sound("sfx/hit3.wav"),'r1': mixer.Sound("sfx/hit0.wav"), 'r2': mixer.Sound("sfx/hit1.wav"), 'r3': mixer.Sound("sfx/hit2.wav"), 'r4': mixer.Sound("sfx/hit3.wav")}
+__hitsounds = {'l1': mixer.Sound("sfx/hit0.wav.ogg"), 'l2': mixer.Sound("sfx/hit1.wav.ogg"), 'l3': mixer.Sound("sfx/hit2.wav"), 'l4': mixer.Sound("sfx/hit3.wav"),'r1': mixer.Sound("sfx/hit0.wav.ogg"), 'r2': mixer.Sound("sfx/hit1.wav.ogg"), 'r3': mixer.Sound("sfx/hit2.wav"), 'r4': mixer.Sound("sfx/hit3.wav")}
 __startsound = mixer.Sound("sfx/start.wav")
 __beepSound = mixer.Sound("sfx/beep.wav")
 __errorSound = mixer.Sound("sfx/error.wav")

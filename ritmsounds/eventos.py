@@ -1,7 +1,7 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+
 class Event:
-    """Clase que representa y habilita el manejo de eventos, al estilo de los de .net. Autor Peter Thatcher, código encontrado en: http://es.softuses.com/149033 """
+    """Clase que representa y habilita el manejo de eventos, al estilo de los de .net. Autor Peter Thatcher, cï¿½digo encontrado en: http://es.softuses.com/149033 """
     def __init__(self):
         self.handlers = set()
 

@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+
 import pygame
 import keyManager
 import soundevents
@@ -24,7 +24,7 @@ def startWindow( width, height):
     menuitems.append("menuwindow:option3")
     menuitems.append("menuwindow:option4")
     menuitems.append("menuwindow:optionexit")
-    escritor.flog("menú construido")
+    escritor.flog("menÃº construido")
     titulo = "menuwindow:title"
     last= titulo
     menuhelp = "menuwindow:help"
@@ -68,7 +68,7 @@ def startWindow( width, height):
                         last=menuhelp
                     else:
                         if option==-1:
-                            escritor.flog("detectada opción -1, cerrando menú")
+                            escritor.flog("detectada opciÃ³n -1, cerrando menÃº")
                             pygame.display.quit()
                             soundevents.musicFade(1500)
                             time.sleep(1)
@@ -76,7 +76,7 @@ def startWindow( width, height):
 
                             return(-1)
                         else:
-                            escritor.flog("aceptada opcion, retornando opción %i " % option)
+                            escritor.flog("aceptada opcion, retornando opciÃ³n %i " % option)
                             pygame.display.quit()
                             end=True
                             soundevents.musicFade(1500)
@@ -87,10 +87,10 @@ def startWindow( width, height):
 
                     soundevents.playMove()
                     option+=1
-                    escritor.flog("movida opción a %i " % option)
+                    escritor.flog("movida opciÃ³n a %i " % option)
                     if option>=5:
                         option=-1
-                        escritor.flog("movida opción a %i " % option)
+                        escritor.flog("movida opciÃ³n a %i " % option)
 
                     m.sayMessage(menuitems[option])
 
@@ -102,10 +102,10 @@ def startWindow( width, height):
 
                     soundevents.playMove()
                     option -= 1
-                    escritor.flog("movida opción a %i " % option)
+                    escritor.flog("movida opciÃ³n a %i " % option)
                     if option< -1:
                         option=4
-                        escritor.flog("movida opción a %i " % option)
+                        escritor.flog("movida opciÃ³n a %i " % option)
                     m.sayMessage(menuitems[option])
 
                 elif(pressKey=='back'):

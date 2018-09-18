@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+
 import juego
 import pygame
 from pygame.locals import *
@@ -61,7 +61,7 @@ def startWindow( width, height):
                     
                 elif pressKey!= 'back' and pressKey!='null':
                     juego.hitEvent(pressKey)
-                    escritor.flog("precionada la tecla  " + pressKey)
+                    #escritor.flog("precionada la tecla  " + pressKey)
 
                 elif(pressKey=='back'):
                     pygame.display.quit()
@@ -98,6 +98,7 @@ def activeOption(option):
         soundevents.playRestoreHP()
     elif option == 6:
         soundevents.playdeath()
+        soundevents.musicPlay(True)
     elif option ==7:
         juego.startEvent()
 

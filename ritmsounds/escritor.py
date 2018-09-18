@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+
 import os.path
 import os
 import datetime
@@ -7,23 +7,37 @@ import eventos
 import jsonpickle
 import song
 import sys
+import logging
 
 flog = eventos.Event()
-
 itemsLoaded = eventos.Event()
 logoff=False
 songsdir=""
 logdir=""
 
+
+def initLog():
+    global _log
+    logging.basicConfig(
+        filename=os.path.join(logdir,"ritmsounds.log"),
+        format="%(asctime)s (%(threadName)-12.12s, %(levelname)-5.5s) %(message)s",
+        level=logging.WARNING
+    )
+
+    _log=logging.getLogger()
+
+def getlog():
+    return _log
+
 def saveSong(song):
-    """Método para escribir en un archivo rtms los pasos y ticks correspondientes de una cancion"""
+    """MÃ©todo para escribir en un archivo rtms los pasos y ticks correspondientes de una cancion"""
     nombre = song.songpath
 
     if (os.path.isfile(os.path.join(logdir, song.songpath+".rtms")) == True):
         try:
             os.remove(os.path.join(logdir,song.songpath+".rtms"))
         except Exception:
-            flog("no se pudo borrar el archivo antiguo, generando uno nuevo ")
+            _log.warning("no se pudo borrar el archivo antiguo, generando uno nuevo ")
             nombre = nombre+"new"
 
     archivo = open(os.path.join(logdir, nombre + ".rtms"), 'w')
@@ -35,13 +49,8 @@ def saveSong(song):
 
 
 def escribirLog(datos):
-    if logoff==False:
-
-        archlog = open(os.path.join(logdir,"ritmsounds.log"), 'a')
-        archlog.write(str(datetime.datetime.now()) +  ":" + datos + "\n")
-        archlog.flush()
-        archlog.close()
-
+    _log.debug(datos)
+    
 flog+=escribirLog
 
 def loadSong(cancion):
@@ -54,15 +63,12 @@ def loadSong(cancion):
         data = arch.read()
         song = jsonpickle.decode(data)
     except Exception as err:
-        flog("problemas al leer archivo ")
-        flog(str(err))
-        flog(err.__traceback__)
+        _log.warning("problemas al leer archivo ")
+        _log.warning(str(err))
+        _log.warning(err.__traceback__)
         return(None)
         
-        
-
-
-    escribirLog("cargada canción " + song.name )
+    escribirLog("cargada canciÃ³n " + song.name )
     return song
 
 
@@ -75,7 +81,7 @@ def loadAllSongs():
     s=""
 
     if os.path.exists(dir)==False:
-        escribirLog("No existe la carpeta.")
+        _log.error("No existe la carpeta.")
         itemsLoaded("nosongs")
         return("nosongs")
 
@@ -102,7 +108,7 @@ def loadAllTotalItems():
     s=""
     escribirLog("cargando archivos desde: " + dir)
     if os.path.exists(dir)==False:
-        escribirLog("no existe la carpeta")
+        _log.error("no existe la carpeta")
         itemsLoaded("nosongs")
         return("nosongs")
 

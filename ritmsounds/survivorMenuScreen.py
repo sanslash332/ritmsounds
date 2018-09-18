@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+
 import pygame
 import keyManager
 import soundevents
@@ -17,7 +17,7 @@ def startWindow( width, height):
     pygame.init()
     pygame.display.set_caption("RitmSounds: Survivor")
     pantalla = pygame.display.set_mode(res)
-    escritor.flog("Iniciado menú de survivor ")
+    escritor.flog("Iniciado menï¿½ de survivor ")
     reloj = pygame.time.Clock()
     end = False
     pantalla.fill((134,230,120))
@@ -40,14 +40,14 @@ def startWindow( width, height):
     svm = survivorManager.SurvivorManager(songs)
     menuitems= _buildmenu(svm)
     
-    escritor.flog("menú construido")
+    escritor.flog("menÃº construido")
     titulo = "survivormenu:help"
     last= titulo
     menuhelp = "survivormenu:help"
     
-    escritor.flog("refrescando pantalla")
+    
     pygame.display.flip()
-    escritor.flog("pantalla refrescada")
+    
     
     
     soundevents.musicLoad("bgm/survivor.ogg")
@@ -71,11 +71,11 @@ def startWindow( width, height):
                 end=True
                 escritor.flog("cerrando juego por evento de cierre. quit event")
                 return(None)
-                escritor.flog("cierre modo prueba por evento de salida")
+                
             elif (event.type == pygame.KEYDOWN):
                 pressKey = keyManager.getKey(event.key)
                 if pressKey== 'accept':
-                    escritor.flog("detectado enter")
+                    #escritor.flog("detectado enter")
                     if option==-1:
                         soundevents.musicStop()
 
@@ -117,10 +117,10 @@ def startWindow( width, height):
                     
                     soundevents.playMove()
                     option+=1
-                    escritor.flog("movida opción a %i " % option)
+                    
                     if option>=5:
                         option=-1
-                        escritor.flog("movida opción a %i " % option)
+                        
 
                     m.sayCustomMessage(menuitems[option])
 
@@ -130,14 +130,14 @@ def startWindow( width, height):
                     
                     soundevents.playMove()
                     option -= 1
-                    escritor.flog("movida opción a %i " % option)
+                    
                     if option< -1:
                         option=4
-                        escritor.flog("movida opción a %i " % option)
+                        
                     m.sayCustomMessage(menuitems[option])
 
                 elif(pressKey=='back'):
-                    escritor.flog("presionado escape")
+                    
                     pygame.display.quit()
                     escritor.flog("cierre por escape")
                     end=True

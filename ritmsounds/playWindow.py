@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+
 import juego
 import pygame
 from pygame.locals import *
@@ -17,7 +17,7 @@ def startWindow( width, height,cancion, modo=0, startHP=-1, restoreHpInPlay=True
     pygame.display.set_caption("Modo juego!")
     escape = False
     pantalla = pygame.display.set_mode(res)
-    escritor.flog("iniciado modo de juego de la canción: " + cancion.name)
+    escritor.flog("iniciado modo de juego de la canciÃ³n: " + cancion.name)
     
     jugo = juego.Juego(cancion,1,modo, startHP,restoreHpInPlay, maxHP)
     reloj = pygame.time.Clock()
@@ -25,8 +25,6 @@ def startWindow( width, height,cancion, modo=0, startHP=-1, restoreHpInPlay=True
     end = False
     pantalla.fill((134,230,120))
     
-    mensaje = "precione las teclas a, s, z y x al ritmo de la canción a medida que el sonido correspondiente suena!!!"
-    mensaje2 = "Precione escape para retornar al menú y detener el juego"
     
     
     
@@ -53,7 +51,7 @@ def startWindow( width, height,cancion, modo=0, startHP=-1, restoreHpInPlay=True
                 if pressKey!='back' and pressKey!='null' and pressKey !='stop':
 
                     juego.stepEvent(pressKey)
-                    escritor.flog("precionada la tecla " + pressKey)
+                    #escritor.flog("precionada la tecla " + pressKey)
 
                 elif(pressKey=='back'):
                     pygame.display.quit()
@@ -72,18 +70,3 @@ def startWindow( width, height,cancion, modo=0, startHP=-1, restoreHpInPlay=True
     if (jugo is None) == False:
 
         return(jugo)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

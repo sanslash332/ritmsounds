@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+
 import time
 import juego
 import pygame
@@ -76,23 +76,3 @@ def startWindow( width, height, cansion, hpactual, completadas, hprecuperado):
 
                 else:
                     m.sayCustomMessage(message)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

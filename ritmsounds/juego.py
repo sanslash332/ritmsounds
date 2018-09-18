@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+
 import pygame
 import eventos
 import escritor
@@ -89,7 +89,7 @@ class Juego(object):
             if len(step) >0:
 
                 self.__stepStack+=step
-                #escritor.flog("añadido paso al stack" + str(step[1]) + " en el tiempo " + str(self.__ticks))
+                #escritor.flog("aÃ±adido paso al stack" + str(step[1]) + " en el tiempo " + str(self.__ticks))
                 for st in step:
                     hitEvent(st[1])
             
@@ -108,7 +108,7 @@ class Juego(object):
             
 
     def __checkStepTime(self):
-        """se remueven los steps que hayan estado por más del pressspeed  ticks en el stack"""
+        """se remueven los steps que hayan estado por mÃ¡s del pressspeed  ticks en el stack"""
         
         for x in range(0, len(self.__prestep)):
             if self.__ticks - self.__prestep[x][0] >= self.__antisipateTime:

@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+
 import eventos
 from pygame.locals import *
 import escritor
@@ -64,7 +64,7 @@ def getKey(key):
 
     for k in keys.items():
         if k[1] == key:
-            escritor.flog("se detecto un:  "+k[0])
+            #escritor.flog("se detecto un:  "+k[0])
             if k[0]=='volmusicdown':
                 soundevents.musicSetVolume(-0.1)
                 return("stop")

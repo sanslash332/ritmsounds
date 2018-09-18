@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+
 class Jugador(object):
     """Clase que representa a un jugador"""
     def __init__(self,nombre="player"):

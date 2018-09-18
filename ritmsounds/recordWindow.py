@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+
 import juego
 import pygame
 from pygame.locals import *
@@ -15,9 +15,9 @@ def endSong():
 def startWindow( width, height,cancion):
     res = (width,height)
     pygame.init()
-    pygame.display.set_caption("Modo grabación!")
+    pygame.display.set_caption("Modo grabaciï¿½n!")
     pantalla = pygame.display.set_mode(res)
-    escritor.flog("iniciado modo de grabación de la canción: " + cancion.name)
+    escritor.flog("iniciado modo de grabaciï¿½n de la canciï¿½n: " + cancion.name)
     escape=False
     jugo = juego.Juego(cancion,0)
     reloj = pygame.time.Clock()
@@ -54,7 +54,7 @@ def startWindow( width, height,cancion):
                 pressKey = keyManager.getKey(event.key)
                 if pressKey!='back' and pressKey!='null':
                     juego.hitEvent(pressKey)
-                    escritor.flog("precionada la tecla " + pressKey)
+                    #escritor.flog("precionada la tecla " + pressKey)
 
                 elif(pressKey== 'back' and pressKey!='null'):
                     pygame.display.quit()

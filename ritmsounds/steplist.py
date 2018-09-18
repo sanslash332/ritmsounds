@@ -1,8 +1,8 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+
 
 class steplist(object):
-    """Clase que representa una colección de pasos para una canción """
+    """Clase que representa una colecciÃ³n de pasos para una canciÃ³n """
     def __init__(self, name="dificultad", steps = None, hands=1, pressSpeed = 20, antisipateTime = 10, description = "", startHP = 10, restoreHp = 10):
         super().__init__()
         self.hands=hands

@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+
 import os
 import sys
 import escritor
@@ -12,14 +12,11 @@ if getattr(sys, 'frozen', False):
 else:
     escritor.songsdir=os.path.join(os.path.dirname(os.path.realpath(__file__)), "songs")
     escritor.logdir=os.path.dirname(os.path.realpath(__file__))
-
-
-
+escritor.initLog()
 import pygame as pg
 import juego
 import song
 import eventos
-
 import resultsWindow
 from pygame.locals import *
 import soundevents
@@ -30,8 +27,6 @@ import menuScreen
 import selectSonScreen
 import recordMenuScreen
 import survivorMenuScreen
-
-
 
 screen_width = 1024
 screen_height =768
@@ -55,7 +50,7 @@ def start():
 
     escritor.escribirLog("iniciando mainloop")
     while option!= -1:
-        escritor.escribirLog("lanzando menú ")
+        escritor.escribirLog("lanzando menu")
         option = menuScreen.startWindow(screen_width,screen_height)
         escritor.flog("capturada la opcion: "+ str(option) + " en el menu ")
         if option==0 or option==1:

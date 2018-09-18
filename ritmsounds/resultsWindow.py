@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+
 import juego
 import pygame
 from pygame.locals import *
@@ -75,23 +75,3 @@ def startWindow( width, height, jg):
                     end=True
                 else:
                     m.sayCustomMessage(mensaje)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

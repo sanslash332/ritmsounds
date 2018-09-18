@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+
 import pygame
 import soundevents
 import messagesManager as m
@@ -14,7 +14,7 @@ def start(onlyNums=False):
     pantalla=pygame.display.set_mode(res)
 
     end=False
-    simbols = "Z/X/C/V/B/N/M/A/S/D/F/G/H/J/K/L/Ñ/Q/W/E/R/T/Y/U/I/O/P/1/2/3/4/5/6/7/8/9/0/z/x/c/v/b/n/m/,/./-/;/:/_/a/s/d/f/g/h/j/k/l/ñ/q/w/e/r/t/y/u/i/o/p/'/¿/?/¡/!/#/$/%/&/(/)/=/á/Á/é/É/í/Í/ó/Ó/ú/Ú"
+    simbols = "Z/X/C/V/B/N/M/A/S/D/F/G/H/J/K/L/Ã‘/Q/W/E/R/T/Y/U/I/O/P/1/2/3/4/5/6/7/8/9/0/z/x/c/v/b/n/m/,/./-/;/:/_/a/s/d/f/g/h/j/k/l/Ã±/q/w/e/r/t/y/u/i/o/p/'/Â¿/?/Â¡/!/#/$/%/&/(/)/=/+/*/[/]/{/}"
     numbersimbols = "1/2/3/4/5/6/7/8/9/0"
     if onlyNums:
         validSimbols = numbersimbols.split('/')

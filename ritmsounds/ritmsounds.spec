@@ -2,14 +2,17 @@
 
 block_cipher = None
 
+bins = [
+    ('*.dll', '.'),
+]
 files = [
-('*.dll', ''),
+
 ('bgm', 'bgm'),
 ('sfx', 'sfx')
 ]
 a = Analysis(['ritmsounds.py'],
              pathex=['.\\'],
-             binaries=None,
+             binaries=bins,
              datas=files,
              hiddenimports=["simplejson"],
              hookspath=[],
